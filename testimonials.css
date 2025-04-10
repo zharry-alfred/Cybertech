@@ -158,3 +158,34 @@ footer {
 .footer-section h3 {
     margin-top: 0;
 }
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 1024px) {
+    .testimonials {
+        padding: 30px;
+    }
+
+    .testimonial {
+        max-width: 600px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .testimonials {
+        padding: 20px;
+    }
+
+    .testimonial {
+        margin: 15px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .testimonials h2 {
+        font-size: 20px;
+    }
+
+    .testimonial p {
+        font-size: 14px;
+    }
+}

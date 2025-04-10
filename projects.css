@@ -317,18 +317,29 @@ footer {
 }
 
 /* Media Queries for Responsiveness */
-@media screen and (max-width: 768px) {
-    .introduction, .testimonials, .contact-form {
+@media screen and (max-width: 1024px) {
+    .introduction, .testimonials, .contact-form, .projects {
         padding: 30px;
     }
 
-    header nav {
-        flex-direction: column;
-        align-items: center;
+    .project-list {
+        gap: 15px;
     }
 
-    header nav a {
-        margin: 5px 0;
+    .project {
+        flex: 1 1 calc(48% - 15px); /* Adjust width for smaller screens */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .introduction, .testimonials, .contact-form, .projects {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .project-list {
+        flex-direction: column;
+        gap: 20px;
     }
 
     .project {
@@ -337,11 +348,19 @@ footer {
 }
 
 @media screen and (max-width: 480px) {
-    .introduction, .testimonials, .contact-form {
-        padding: 20px;
+    header nav a {
+        font-size: 14px;
     }
 
-    header nav a {
+    .introduction, .testimonials, .contact-form, .projects {
+        padding: 15px;
+    }
+
+    .project h3 {
+        font-size: 16px;
+    }
+
+    .project p {
         font-size: 14px;
     }
 }

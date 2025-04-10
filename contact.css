@@ -266,6 +266,16 @@ footer {
 }
 
 /* Media Queries for Responsiveness */
+@media screen and (max-width: 1024px) {
+    .contact-section {
+        padding: 30px;
+    }
+
+    .contact-container {
+        gap: 15px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .contact-container {
         flex-direction: column;

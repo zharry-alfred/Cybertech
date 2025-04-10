@@ -318,6 +318,16 @@ footer {
 }
 
 /* Media Queries for Responsiveness */
+@media screen and (max-width: 1024px) {
+    .about-section {
+        padding: 30px;
+    }
+
+    .three-columns {
+        gap: 15px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .introduction, .testimonials, .contact-form {
         padding: 30px;
@@ -334,6 +344,15 @@ footer {
 
     .about-section {
         padding: 20px;
+    }
+
+    .three-columns {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .three-columns .column {
+        text-align: center;
     }
 }
 
@@ -352,5 +371,9 @@ footer {
 
     .about-section h2 {
         font-size: 20px;
+    }
+
+    .three-columns .column {
+        padding: 15px;
     }
 }
