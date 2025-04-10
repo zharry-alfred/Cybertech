@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - CyberTech Hexperts Solutions</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <header>
+        <!-- ...existing code from login.html header... -->
+    </header>
+    <main>
+        <div class="container">
+            <div class="signup-box">
+                <form class="form signup-form" action="dashboard.html" method="post">
+                    <h2 class="header">Join CyberTech Today</h2>
+                    <p class="sub-header">Create your account and start your journey with us</p>
+                    <div class="input-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name" class="input" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" class="input" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Create a password" class="input" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" placeholder="Confirm your password" class="input" required />
+                    </div>
+                    <button type="submit" class="button sign-up">Sign Up</button>
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+                    <button class="button google-sign-in">
+                        <img src="google-svgrepo-com.svg" alt="Google Icon" class="icon">
+                        Sign up with Google
+                    </button>
+                    <p class="footer">
+                        Already have an account? <a href="login.html" class="link">Log in</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <!-- ...existing code from login.html footer... -->
+    </footer>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="projects.css">
+    <script>
+        function toggleDetails(projectId) {
+            const details = document.getElementById(projectId);
+            details.style.display = details.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="CYBERTECH LOGO 1.jpg" alt="CyberTech Hexperts Solutions Logo" style="height: 50px; margin-right: 10px;">
+            CyberTech Hexperts Solutions
+        </div>
+        <nav>
+            <a href="dashboard.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="testimonials.html">Testimonials</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <a href="login.html" class="login-button">Login</a>
+    </header>
+
+    <section class="projects">
+        <h2>My Projects</h2>
+        <div class="project-list">
+            <div class="project">
+                <h3>Project 1: IT System Optimization</h3>
+                <p>Streamlining IT infrastructure for a mid-sized company to improve efficiency and reduce downtime.</p>
+                <button class="project-link" onclick="toggleDetails('project1-details')">View Project</button>
+                <div id="project1-details" style="display: none;">
+                    <p>This project involved analyzing the existing IT systems, identifying bottlenecks, and implementing solutions such as server upgrades, network optimization, and enhanced security protocols. The result was a 30% improvement in system uptime and a significant reduction in troubleshooting time.</p>
+                </div>
+            </div>
+            <div class="project">
+                <h3>Project 2: Branding and Logo Design</h3>
+                <p>Creating a cohesive brand identity for a startup, including logo design, color schemes, and marketing materials.</p>
+                <button class="project-link" onclick="toggleDetails('project2-details')">View Project</button>
+                <div id="project2-details" style="display: none;">
+                    <p>For this project, I worked closely with the client to understand their vision and target audience. The deliverables included a modern logo, business cards, and social media templates. The branding helped the startup establish a professional image and attract new customers.</p>
+                </div>
+            </div>
+            <div class="project">
+                <h3>Project 3: MS Office Training Program</h3>
+                <p>Conducting a comprehensive training program for employees to enhance their proficiency in MS Office Suite.</p>
+                <button class="project-link" onclick="toggleDetails('project3-details')">View Project</button>
+                <div id="project3-details" style="display: none;">
+                    <p>This program covered advanced features of MS Word, Excel, and PowerPoint. Participants learned how to create dynamic reports, automate tasks using macros, and design impactful presentations. Feedback from attendees highlighted the practical value of the training in their daily work.</p>
+                </div>
+            </div>
+            <div class="project">
+                <h3>Project 4: Graphic Design for E-commerce</h3>
+                <p>Designing product images, banners, and promotional materials for an online store.</p>
+                <button class="project-link" onclick="toggleDetails('project4-details')">View Project</button>
+                <div id="project4-details" style="display: none;">
+                    <p>The project involved creating visually appealing graphics that aligned with the store's branding. The designs were optimized for web and mobile platforms, resulting in a 20% increase in customer engagement and sales.</p>
+                </div>
+            </div>
+            <div class="project">
+                <h3>Project 5: Google Suite Training</h3>
+                <p>Helping a team transition to Google Suite by providing hands-on training and support.</p>
+                <button class="project-link" onclick="toggleDetails('project5-details')">View Project</button>
+                <div id="project5-details" style="display: none;">
+                    <p>This project focused on teaching employees how to use Google Docs, Sheets, and Drive effectively. The training emphasized collaboration features, enabling the team to work more efficiently and reduce reliance on email for file sharing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <p>
+                <a href="https://wa.me/+254798830470" target="_blank">
+                    <img src="whatsapp-svgrepo-com.svg" alt="WhatsApp" style="height: 20px; vertical-align: middle;"> WhatsApp
+                </a> |
+                <a href="https://www.facebook.com/profile.php?id=61553165412647" target="_blank">
+                    <img src="facebook-svgrepo-com.svg" alt="Facebook" style="height: 20px; vertical-align: middle;"> Facebook
+                </a> |
+                <a href="https://www.youtube.com/channel/UCPw_hJpTrNnYbvwcvfyyv2Q" target="_blank">
+                    <img src="youtube-color-svgrepo-com.svg" alt="YouTube" style="height: 20px; vertical-align: middle;"> YouTube
+                </a>
+            </p>
+            <p>Stay connected on social media.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Subscribe to Newsletter</h3>
+            <form action="#" method="post" style="display: flex; gap: 10px; align-items: center;">
+                <input type="email" name="email" placeholder="Enter your email" required style="padding: 5px; border-radius: 5px; border: 1px solid #ddd; flex: 1;">
+                <button type="submit" style="padding: 5px 10px; background-color: var(--primary-color); color: var(--text-color-light); border: none; border-radius: 5px; cursor: pointer;">Subscribe</button>
+            </form>
+            <p>Get the latest updates and offers.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Get in Touch</h3>
+            <p>Have questions? <br> Contact us anytime.</p>
+            <p>
+                <img src="phone-call-communication-svgrepo-com.svg" alt="Phone" style="height: 20px; vertical-align: middle; margin-right: 5px;">
+                <a href="tel:+254798830470">+254 798 830 470</a><br>
+                <img src="email-opened-svgrepo-com.svg" alt="Email" style="height: 20px; vertical-align: middle; margin-right: 5px;">
+                <a href="mailto:info@cybertechsolutions.com">info@cybertechsolutions.com</a>
+            </p>
+        </div>
+        <div class="footer-section">
+            <h3>Need Help</h3>
+            <p>We're here to support you 24/7.</p>
+            <p>
+                <a href="https://livechat.example.com" target="_blank">
+                    <img src="live-chat-headset-svgrepo-com.svg" alt="Live Chat" style="height: 20px; vertical-align: middle; margin-right: 5px;">
+                    Start a Live Chat
+                </a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

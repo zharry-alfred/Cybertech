@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CyberTech Hexperts Solutions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="CYBERTECH LOGO 1.jpg" alt="CyberTech Hexperts Solutions Logo" style="height: 50px; margin-right: 10px;">
+            CyberTech Hexperts Solutions
+        </div>
+        <nav>
+            <a href="dashboard.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="testimonials.html">Testimonials</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <a href="login.html" class="login-button">Login</a>
+    </header>
+    <main>
+        <div class="container">
+            <div class="login-box">
+                <form class="form login-form" action="dashboard.html" method="get">
+                    <h2 class="header">Welcome Back!</h2>
+                    <p class="sub-header">Log in to access your account</p>
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" class="input" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" class="input" required />
+                    </div>
+                    <button type="submit" class="button sign-in">Sign In</button>
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+                    <button class="button google-sign-in">
+                        <img src="google-svgrepo-com.svg" alt="Google Icon" class="icon">
+                        Sign in with Google
+                    </button>
+                    <p class="footer">
+                        Don't have an account? <a href="signup.html" class="link">Sign up</a>
+                        <br>
+                        <a href="forgotpassword.html" class="link">Forgot password?</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <p>
+                <a href="https://wa.me/+254798830470" target="_blank">
+                    <img src="whatsapp-svgrepo-com.svg" alt="WhatsApp" style="height: 20px; vertical-align: middle;"> WhatsApp
+                </a> |
+                <a href="https://www.facebook.com/profile.php?id=61553165412647" target="_blank">
+                    <img src="facebook-svgrepo-com.svg" alt="Facebook" style="height: 20px; vertical-align: middle;"> Facebook
+                </a> |
+                <a href="https://www.youtube.com/channel/UCPw_hJpTrNnYbvwcvfyyv2Q" target="_blank">
+                    <img src="youtube-color-svgrepo-com.svg" alt="YouTube" style="height: 20px; vertical-align: middle;"> YouTube
+                </a>
+            </p>
+            <p>Stay connected on social media.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Subscribe to Newsletter</h3>
+            <form action="#" method="post" style="display: flex; gap: 10px; align-items: center;">
+                <input type="email" name="email" placeholder="Enter your email" required style="padding: 5px; border-radius: 5px; border: 1px solid #ddd; flex: 1;">
+                <button type="submit" style="padding: 5px 10px; background-color: var(--primary-color); color: var(--text-color-light); border: none; border-radius: 5px; cursor: pointer;">Subscribe</button>
+            </form>
+            <p>Get the latest updates and offers.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Get in Touch</h3>
+            <p>Have questions? <br> Contact us anytime.</p>
+            <p>
+                <img src="phone-call-communication-svgrepo-com.svg" alt="Phone" style="height: 20px; vertical-align: middle; margin-right: 5px;">
+                <a href="tel:+254798830470">+254 798 830 470</a><br>
+                <img src="email-opened-svgrepo-com.svg" alt="Email" style="height: 20px; vertical-align: middle; margin-right: 5px;">
+                <a href="mailto:info@cybertechsolutions.com">info@cybertechsolutions.com</a>
+            </p>
+        </div>
+        <div class="footer-section">
+            <h3>Need Help</h3>
+            <p>We're here to support you 24/7.</p>
+            <p>
+                <a href="https://livechat.example.com" target="_blank">
+                    <img src="live-chat-headset-svgrepo-com.svg" alt="Live Chat" style="height: 20px; vertical-align: middle; margin-right: 5px;">
+                    Start a Live Chat
+                </a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

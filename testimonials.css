@@ -1,0 +1,160 @@
+/* --- CSS Variables for Theming --- */
+:root {
+    --primary-color: #4a90e2;
+    --primary-color-darker: #357abd;
+    --text-color-light: #ffffff;
+    --text-color-dark: #333;
+    --text-color-medium: #555;
+    --background-color-light: #ffffff;
+    --background-color-body: #f0f0f5;
+    --box-shadow-color: rgba(0, 0, 0, 0.2);
+    --border-color: #ddd;
+    --container-padding: 40px;
+    --border-radius: 10px;
+    --nav-height: 60px;
+}
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: var(--background-color-body);
+    color: var(--text-color-dark);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 10px 20px;
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: 0 2px 5px var(--box-shadow-color);
+    margin: 0 auto;
+    max-width: 1200px;
+    border-radius: var(--border-radius);
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+}
+
+header nav a {
+    margin: 0 15px;
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: var(--text-color-light);
+    text-decoration: underline;
+}
+
+header .login-button {
+    background-color: var(--primary-color);
+    padding: 8px 12px;
+    color: var(--text-color-light);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+header .login-button:hover {
+    background-color: var(--primary-color-darker);
+}
+
+/* Testimonials Section */
+.testimonials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--container-padding);
+    border-bottom: 2px solid var(--border-color);
+    background-color: var(--background-color-light);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 15px var(--box-shadow-color);
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.testimonials h2 {
+    text-align: center;
+    margin-top: 0;
+    padding-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color-dark);
+}
+
+.testimonial {
+    flex: 1;
+    margin: 20px 0;
+    text-align: center;
+    background-color: var(--background-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 5px var(--box-shadow-color);
+    max-width: 800px;
+}
+
+.testimonial img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.testimonial p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: var(--text-color-medium);
+}
+
+.testimonial .read-more-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.testimonial .read-more-btn:hover {
+    background-color: var(--primary-color-darker);
+}
+
+.testimonial .more-content {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--text-color-medium);
+}
+
+/* Footer Styles */
+footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 20px;
+    border-top: 2px solid var(--border-color);
+    text-align: center;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: var(--border-radius);
+}
+
+.footer-section h3 {
+    margin-top: 0;
+}

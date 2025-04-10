@@ -1,0 +1,296 @@
+/* --- CSS Variables for Theming --- */
+:root {
+    --primary-color: #4a90e2;
+    --primary-color-darker: #357abd;
+    --text-color-light: #ffffff;
+    --text-color-dark: #333;
+    --text-color-medium: #555;
+    --background-color-light: #ffffff;
+    --background-color-body: #f0f0f5;
+    --box-shadow-color: rgba(0, 0, 0, 0.2);
+    --border-color: #ddd;
+    --container-padding: 40px;
+    --border-radius: 10px;
+    --nav-height: 60px;
+}
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: var(--background-color-body);
+    color: var(--text-color-dark);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 10px 20px;
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: 0 2px 5px var(--box-shadow-color);
+    margin: 0 auto;
+    max-width: 1200px;
+    border-radius: var(--border-radius);
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+}
+
+header nav a {
+    margin: 0 15px;
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: var(--text-color-light);
+    text-decoration: underline;
+}
+
+header .login-button {
+    background-color: var(--primary-color);
+    padding: 8px 12px;
+    color: var(--text-color-light);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+header .login-button:hover {
+    background-color: var(--primary-color-darker);
+}
+
+/* Testimonials Section */
+.testimonials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--container-padding);
+    border-bottom: 2px solid var(--border-color);
+    background-color: var(--background-color-light);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 15px var(--box-shadow-color);
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.testimonials h2 {
+    text-align: center;
+    margin-top: 0;
+    padding-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color-dark);
+}
+
+.testimonial {
+    flex: 1;
+    margin: 20px 0;
+    text-align: center;
+    background-color: var(--background-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 5px var(--box-shadow-color);
+    max-width: 800px;
+}
+
+.testimonial img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.testimonial p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: var(--text-color-medium);
+}
+
+.testimonial .read-more-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.testimonial .read-more-btn:hover {
+    background-color: var(--primary-color-darker);
+}
+
+.testimonial .more-content {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--text-color-medium);
+}
+
+/* Contact Section */
+.contact-section {
+    padding: var(--container-padding);
+    background-color: var(--background-color-light);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 15px var(--box-shadow-color);
+    margin: 20px auto;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.contact-section h1 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.contact-section p {
+    margin-bottom: 30px;
+    font-size: 16px;
+    color: var(--text-color-medium);
+}
+
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.contact-form, .contact-info {
+    flex: 1;
+    min-width: 300px;
+    background-color: var(--background-color-light);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px var(--box-shadow-color);
+}
+
+.contact-form h2, .contact-info h2 {
+    color: var(--primary-color-darker);
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color-dark);
+}
+
+.contact-form input, .contact-form textarea, .contact-form button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.contact-form button {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: var(--primary-color-darker);
+}
+
+.contact-info p, .contact-info ul {
+    text-align: left;
+    font-size: 16px;
+    color: var(--text-color-medium);
+    margin-bottom: 15px;
+}
+
+.contact-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact-info ul li {
+    margin-bottom: 10px;
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--primary-color-darker);
+}
+
+/* Footer Styles */
+footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 20px;
+    border-top: 2px solid var(--border-color);
+    text-align: center;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: var(--border-radius);
+}
+
+.footer-section h3 {
+    margin-top: 0;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-form, .contact-info {
+        min-width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contact-section h1 {
+        font-size: 24px;
+    }
+
+    .contact-form h2, .contact-info h2 {
+        font-size: 20px;
+    }
+
+    .contact-form input, .contact-form textarea, .contact-form button {
+        font-size: 14px;
+    }
+
+    .contact-info p, .contact-info ul {
+        font-size: 14px;
+    }
+}
