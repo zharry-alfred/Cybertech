@@ -1,0 +1,88 @@
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; /* Background color for the loader */
+    z-index: 9999;
+    visibility: hidden; /* Hide loader by default */
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+body.loading #loader {
+    visibility: visible; /* Show loader when body has 'loading' class */
+    opacity: 1;
+}
+
+body.loaded #loader {
+    display: none; /* Hide loader after loading is complete */
+}
+
+.svg-frame {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.svg-frame svg {
+    position: absolute;
+    transition: 0.5s;
+    z-index: calc(1 - (0.2 * var(--j)));
+    transform-origin: center;
+    width: 344px;
+    height: 344px;
+    fill: none;
+}
+
+.svg-frame:hover svg {
+    transform: rotate(10deg) skew(15deg) translateX(calc(45px * var(--i)))
+      translateY(calc(-35px * var(--i)));
+}
+
+.svg-frame svg #center {
+    transition: 0.5s;
+    transform-origin: center;
+}
+
+.svg-frame:hover svg #center {
+    transform: rotate(-30deg) translateX(45px) translateY(-3px);
+}
+
+#out2 {
+    animation: rotate16 2s ease-in-out infinite alternate;
+    transform-origin: center;
+    stroke: white;
+}
+
+#out3 {
+    animation: rotate16 2s ease-in infinite normal;
+    transform-origin: center;
+    stroke: #ff0;
+}
+
+#inner3,
+#inner1 {
+    animation: rotate16 0.5s ease-in-out infinite alternate;
+    transform-origin: center;
+}
+
+#center1 {
+    fill: #ff0;
+    animation: rotate16 0.5s ease-out infinite normal;
+    transform-origin: center;
+}
+
+@keyframes rotate16 {
+    to {
+        transform: rotate(360deg);
+    }
+}

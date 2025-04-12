@@ -24,6 +24,66 @@ body {
     padding: 20px; /* Add padding to detach sections from screen edges */
 }
 
+/* Loader Styles */
+.loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Slightly darker background */
+    z-index: 9999;
+    visibility: hidden; /* Hidden by default */
+    opacity: 0;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+body.loading .loader-wrapper {
+    visibility: visible; /* Show loader when body has 'loading' class */
+    opacity: 1;
+}
+
+body.loaded .loader-wrapper {
+    display: none; /* Hide loader after loading is complete */
+}
+
+.svg-frame {
+    width: 150px; /* Reduced size for a cleaner look */
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.svg-frame svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #00FFFF; /* Bright cyan for better visibility */
+    stroke-width: 2;
+    animation: rotate 1.5s linear infinite; /* Faster rotation for a dynamic feel */
+}
+
+.svg-frame svg:nth-child(2) {
+    stroke: #FF00FF; /* Add a secondary color for contrast */
+    animation: rotate-reverse 1.5s linear infinite; /* Reverse rotation for variety */
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate-reverse {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
 /* Header Styles */
 header {
     display: flex;
