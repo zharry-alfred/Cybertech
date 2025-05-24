@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Topic Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-stone-100 text-stone-800 min-h-screen flex flex-col">
+    <header class="bg-stone-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <h1 class="text-2xl font-bold text-center">IT Topic Details</h1>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 py-8 flex-grow w-full">
+        <div id="topicDetails" class="bg-white shadow-xl rounded-lg p-6 max-w-2xl mx-auto">
+            <p class="text-center text-stone-500">Loading...</p>
+        </div>
+        <div class="mt-8 text-center">
+            <a href="index.html" class="text-teal-700 hover:underline">&larr; Back to Topic Explorer</a>
+            <button id="downloadPdfBtn" class="ml-4 px-4 py-2 bg-teal-700 text-white rounded hover:bg-teal-800">Download as PDF</button>
+        </div>
+    </main>
+    <footer class="bg-stone-800 text-white py-4 mt-auto">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>&copy; 2025 Your Channel Name. Powered by IT Topic Explorer.</p>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        // filepath: c:\Users\hrrsn\Desktop\All Web Devs\IT issues and helpful tricks\topic.html
+        const topicsData = [
+            {
+                "title": "Speed Up Windows Startup: Top 5 tweaks for a faster boot.",
+                "category": "Windows OS Tips & Troubleshooting",
+                "solutions": [
+                    "Disable unnecessary startup programs via Task Manager.",
+                    "Turn off fast startup if causing issues.",
+                    "Update drivers and Windows regularly.",
+                    "Defragment your hard drive (HDD only).",
+                    "Scan for malware or viruses.",
+                    "Check for firmware/BIOS updates."
+                ],
+                "details": `
+                    <h2 class="text-xl font-bold mb-2">Comprehensive Guide: Speed Up Windows Startup</h2>
+                    <p>
+                    A slow Windows startup can be frustrating and waste valuable time. This guide will walk you through every major method to optimize your boot time, from basic tweaks to advanced troubleshooting. By the end, you'll understand not just what to do, but why each step matters.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">1. Disable Unnecessary Startup Programs</h3>
+                    <p>
+                    Many programs set themselves to launch at startup, slowing down your boot process. To manage these:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Press <b>Ctrl+Shift+Esc</b> to open Task Manager.</li>
+                        <li>Go to the <b>Startup</b> tab.</li>
+                        <li>Review the list. Right-click and <b>Disable</b> any programs you don't need immediately after boot (e.g., Spotify, Adobe Updater).</li>
+                        <li>Leave essential items (antivirus, drivers) enabled.</li>
+                    </ol>
+                    <p>
+                    <i>Tip:</i> Disabling too many items can cause some features to be unavailable until you launch the app manually, so be selective.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">2. Turn Off Fast Startup (If Causing Issues)</h3>
+                    <p>
+                    Fast Startup is a hybrid shutdown feature that can sometimes cause problems, especially with dual-boot systems or older hardware.
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Open <b>Control Panel &gt; Power Options</b>.</li>
+                        <li>Click <b>Choose what the power buttons do</b>.</li>
+                        <li>Click <b>Change settings that are currently unavailable</b>.</li>
+                        <li>Uncheck <b>Turn on fast startup</b>.</li>
+                        <li>Click <b>Save changes</b>.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">3. Update Drivers and Windows</h3>
+                    <p>
+                    Outdated drivers can cause delays at boot. To update:
+                    </p>
+                    <ul class="list-disc pl-6 mb-2 text-stone-700">
+                        <li>Run <b>Windows Update</b> regularly.</li>
+                        <li>Update graphics, chipset, and storage drivers from your PC/motherboard manufacturer's website.</li>
+                    </ul>
+                    <h3 class="font-semibold mt-4 mb-2">4. Defragment Your Hard Drive (HDD Only)</h3>
+                    <p>
+                    Fragmented files slow down boot on traditional hard drives. SSDs do not need defragmentation.
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Search for <b>Defragment and Optimize Drives</b> in the Start menu.</li>
+                        <li>Select your HDD and click <b>Optimize</b>.</li>
+                        <li>Schedule regular optimization (weekly is typical).</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">5. Scan for Malware or Viruses</h3>
+                    <p>
+                    Malware can run at startup and slow down your system. Use Windows Defender or a reputable antivirus to scan your PC.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">6. Check for Firmware/BIOS Updates</h3>
+                    <p>
+                    Sometimes, outdated BIOS/UEFI firmware can cause slow POST (pre-boot) times. Visit your motherboard or PC manufacturer's website for updates and follow their instructions carefully.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Advanced Troubleshooting</h3>
+                    <ul class="list-disc pl-6 mb-2 text-stone-700">
+                        <li>Use <b>Event Viewer</b> (Windows Logs &gt; System) to identify boot delays.</li>
+                        <li>Try <b>Autoruns</b> (Microsoft Sysinternals) for a deep dive into all startup items.</li>
+                        <li>Consider a <b>clean boot</b> (disable all non-Microsoft services) to isolate problematic software.</li>
+                    </ul>
+                    <h3 class="font-semibold mt-4 mb-2">Hardware Upgrades</h3>
+                    <ul class="list-disc pl-6 mb-2 text-stone-700">
+                        <li><b>Upgrade to an SSD:</b> The single biggest improvement for boot speed. SSDs are much faster than HDDs.</li>
+                        <li><b>Add more RAM:</b> If your system is low on memory, adding RAM can help with overall performance.</li>
+                    </ul>
+                    <h3 class="font-semibold mt-4 mb-2">Summary & Maintenance Tips</h3>
+                    <ul class="list-disc pl-6 mb-2 text-stone-700">
+                        <li>Regularly review startup items and uninstall unused software.</li>
+                        <li>Keep Windows and drivers up to date.</li>
+                        <li>Scan for malware monthly.</li>
+                        <li>Consider a clean Windows install every few years for best performance.</li>
+                    </ul>
+                    <p class="mt-4">
+                    <b>Further Reading:</b> <a href="https://support.microsoft.com/en-us/help/4026268/windows-10-speed-up-your-pc" target="_blank" class="text-blue-600 underline">Microsoft: Tips to improve PC performance</a>
+                    </p>
+                `
+            },
+            {
+                "title": "Disk Cleanup Like a Pro: Freeing up space you didn't know you had.",
+                "category": "Windows OS Tips & Troubleshooting",
+                "solutions": [
+                    "Use Windows Disk Cleanup tool.",
+                    "Remove old Windows update files.",
+                    "Uninstall unused programs.",
+                    "Clear browser cache and temp files.",
+                    "Delete large files from Downloads folder.",
+                    "Move files to external storage or cloud."
+                ],
+                "details": `
+                    <h2 class="text-xl font-bold mb-2">Comprehensive Guide: Disk Cleanup Like a Pro</h2>
+                    <p>
+                    Running out of disk space can slow down your computer and cause issues with updates and installations. This guide provides a thorough approach to freeing up disk space on your Windows PC, using built-in tools and manual methods.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">1. Use Windows Disk Cleanup Tool</h3>
+                    <p>
+                    The Disk Cleanup tool helps you remove unnecessary files from your hard drive. To use it:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Type <b>Disk Cleanup</b> in the Windows search bar and open the app.</li>
+                        <li>Select the drive you want to clean (usually C:) and click <b>OK</b>.</li>
+                        <li>Wait for it to calculate how much space you can free up.</li>
+                        <li>In the Disk Cleanup dialog, check the boxes for the file types you want to delete. This can include temporary files, system cache, Recycle Bin, etc.</li>
+                        <li>Click <b>OK</b>, then <b>Delete Files</b> to confirm.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">2. Remove Old Windows Update Files</h3>
+                    <p>
+                    After updating, Windows keeps old files that can be removed safely:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Open <b>Settings</b> &gt; <b>System</b> &gt; <b>Storage</b>.</li>
+                        <li>Click on <b>Temporary files</b>.</li>
+                        <li>Check <b>Previous Windows installation(s)</b> if available, then click <b>Remove files</b>.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">3. Uninstall Unused Programs</h3>
+                    <p>
+                    Removing programs you no longer use can free up significant space:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Go to <b>Settings</b> &gt; <b>Apps</b> &gt; <b>Apps & features</b>.</li>
+                        <li>Scroll through the list and click on any program you want to remove.</li>
+                        <li>Click <b>Uninstall</b> and follow the prompts.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">4. Clear Browser Cache and Temp Files</h3>
+                    <p>
+                    Browsers store cache and temporary files that can be cleared to free up space:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>For Chrome: Settings &gt; Privacy and security &gt; Clear browsing data.</li>
+                        <li>For Firefox: Options &gt; Privacy & Security &gt; Cookies and Site Data &gt; Clear Data.</li>
+                        <li>For Edge: Settings &gt; Privacy, search, and services &gt; Clear browsing data.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">5. Delete Large Files from Downloads Folder</h3>
+                    <p>
+                    Your Downloads folder may contain large files you no longer need:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Open the <b>File Explorer</b> and go to the <b>Downloads</b> folder.</li>
+                        <li>Sort files by size to find large files quickly.</li>
+                        <li>Delete any files you no longer need.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">6. Move Files to External Storage or Cloud</h3>
+                    <p>
+                    For files you want to keep but don't need immediate access to, consider moving them:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Connect an external hard drive or USB drive.</li>
+                        <li>Copy files from your PC to the external drive.</li>
+                        <li>For cloud storage, sign up for a service like Google Drive, Dropbox, or OneDrive.</li>
+                        <li>Upload files to the cloud and ensure they are synced.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">Advanced Disk Cleanup Tips</h3>
+                    <ul class="list-disc pl-6 mb-2 text-stone-700">
+                        <li>Use <b>WinDirStat</b> or <b>TreeSize</b> to analyze disk space usage and find large, unnecessary files.</li>
+                        <li>Regularly check your <b>System Restore</b> space and delete old restore points if needed.</li>
+                        <li>Consider third-party tools like <b>CCleaner</b> for more advanced cleaning options, but use with caution.</li>
+                    </ul>
+                    <h3 class="font-semibold mt-4 mb-2">Summary</h3>
+                    <p>
+                    Regular disk cleanup is essential for maintaining system performance and preventing storage issues. By following this guide, you can effectively free up space and keep your computer running smoothly.
+                    </p>
+                `
+            },
+            {
+                "title": "Solving \"Not Responding\" Errors: What to do when an app freezes.",
+                "category": "Windows OS Tips & Troubleshooting",
+                "solutions": [
+                    "Wait a few moments for the app to recover.",
+                    "Use Task Manager to end the task.",
+                    "Update or reinstall the problematic application.",
+                    "Check for Windows updates.",
+                    "Scan for malware.",
+                    "Check for low memory or disk space."
+                ],
+                "details": `
+                    <h2 class="text-xl font-bold mb-2">Comprehensive Guide: Solving "Not Responding" Errors</h2>
+                    <p>
+                    Encountering "Not Responding" errors can be frustrating, especially if you're in the middle of important work. This guide will help you understand why these errors occur and how to effectively resolve them.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">1. Understanding "Not Responding" Errors</h3>
+                    <p>
+                    Applications may become unresponsive for various reasons, including high CPU usage, insufficient memory, or software conflicts. When an app shows "Not Responding" in the title bar, it means the app is temporarily unable to process commands.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">2. Basic Troubleshooting Steps</h3>
+                    <p>
+                    Follow these steps to quickly resolve most "Not Responding" errors:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li><b>Wait it Out:</b> Sometimes, the app will recover on its own. Wait a few moments to see if the app starts responding again.</li>
+                        <li><b>End Task via Task Manager:</b> If the app doesn't respond after a while, press <b>Ctrl+Shift+Esc</b> to open Task Manager. Find the unresponsive app, right-click it, and select <b>End Task</b>.</li>
+                        <li><b>Check for Updates:</b> Ensure both Windows and the problematic app are up to date. Updates often include bug fixes and performance improvements.</li>
+                        <li><b>Reinstall the Application:</b> If an app consistently becomes unresponsive, try uninstalling and then reinstalling it.</li>
+                        <li><b>Scan for Malware:</b> Malware can cause apps to behave erratically. Run a full system scan using Windows Defender or another trusted antivirus program.</li>
+                        <li><b>Free Up System Resources:</b> Low memory or disk space can cause apps to hang. Close unnecessary programs and tabs, and consider upgrading your RAM or disk if you frequently run out of resources.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">3. Advanced Troubleshooting</h3>
+                    <p>
+                    If the basic steps don't resolve the issue, try these advanced troubleshooting methods:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li><b>Check Event Viewer:</b> Look for error messages or warnings in the Event Viewer that coincide with the times the app becomes unresponsive.</li>
+                        <li><b>Perform a Clean Boot:</b> This starts Windows with a minimal set of drivers and startup programs, which can help identify if background programs are causing the issue.</li>
+                        <li><b>Test Your Hardware:</b> Faulty RAM or a failing hard drive can cause applications to freeze. Use built-in Windows tools like <b>Windows Memory Diagnostic</b> and <b>CHKDSK</b> to test your hardware.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">4. When to Seek Help</h3>
+                    <p>
+                    If you're unable to resolve the "Not Responding" error, it may be time to seek professional help. Consider contacting Microsoft Support or visiting a certified technician, especially if the issue is frequent and disruptive.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Summary</h3>
+                    <p>
+                    "Not Responding" errors can usually be resolved with simple troubleshooting steps. Regular maintenance, such as keeping your software updated and scanning for malware, can help prevent these errors from occurring.
+                    </p>
+                `
+            },
+            {
+                "title": "Creating Strong, Unique Passwords (and Managing Them).",
+                "category": "Security",
+                "solutions": [
+                    "Use a password manager to generate and store complex passwords.",
+                    "Avoid reusing passwords across sites.",
+                    "Enable two-factor authentication (2FA) wherever possible."
+                ],
+                "details": `
+                    <h2 class="text-xl font-bold mb-2">Comprehensive Guide: Creating Strong, Unique Passwords</h2>
+                    <p>
+                    In today's digital age, a strong password is your first line of defense against unauthorized access to your accounts. This guide will help you create robust passwords and manage them effectively.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">1. Importance of Strong Passwords</h3>
+                    <p>
+                    Weak passwords are easy targets for attackers. A strong password helps protect your personal information, finances, and other sensitive data from cybercriminals.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">2. Characteristics of a Strong Password</h3>
+                    <p>
+                    A strong password typically has the following characteristics:
+                    </p>
+                    <ul class="list-disc pl-6 mb-2 text-stone-700">
+                        <li>At least 12-16 characters long.</li>
+                        <li>A mix of uppercase and lowercase letters.</li>
+                        <li>Includes numbers and special characters (e.g., !@#$%^&*).</li>
+                        <li>Does not contain easily guessable information, such as birthdays or common words.</li>
+                    </ul>
+                    <h3 class="font-semibold mt-4 mb-2">3. Tips for Creating Strong Passwords</h3>
+                    <p>
+                    Use these tips to create passwords that are difficult to crack:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li><b>Use a Passphrase:</b> Create a password using a memorable phrase, song lyric, or quote. For example, "I love to eat pizza on Fridays!" can become "ILuv2EatPizza$Fr1day!".</li>
+                        <li><b>Substitute Characters:</b> Replace letters with similar-looking numbers or symbols (e.g., A=4, E=3, I=1, O=0, S=5).</li>
+                        <li><b>Mix It Up:</b> Use different types of characters and avoid using the same character consecutively.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">4. Using a Password Manager</h3>
+                    <p>
+                    A password manager can help you generate, store, and manage your passwords securely. Here's how to use one:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Choose a reputable password manager (e.g., LastPass, 1Password, Bitwarden).</li>
+                        <li>Install the password manager's app or browser extension.</li>
+                        <li>Create a strong master password for the manager itself.</li>
+                        <li>Use the manager to generate and store passwords for all your accounts.</li>
+                        <li>Enable two-factor authentication (2FA) for your password manager for added security.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">5. Enabling Two-Factor Authentication (2FA)</h3>
+                    <p>
+                    2FA adds an extra layer of security by requiring a second form of verification (e.g., a text message code) in addition to your password. To enable 2FA:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Go to the security settings of your online account.</li>
+                        <li>Look for the option to enable two-factor authentication or 2-step verification.</li>
+                        <li>Follow the prompts to set up 2FA, typically involving your phone number or an authenticator app.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">6. Regularly Update Your Passwords</h3>
+                    <p>
+                    Change your passwords regularly, especially for sensitive accounts like banking or email. Update your passwords immediately if you suspect any account has been compromised.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Summary</h3>
+                    <p>
+                    Strong, unique passwords are essential for protecting your online accounts. By following this guide, you can create passwords that are difficult to crack and manage them effectively using a password manager.
+                    </p>
+                `
+            },
+            {
+                "title": "How to Take Screenshots & Screen Recordings (Built-in tools).",
+                "category": "Windows",
+                "solutions": [
+                    "Use Snipping Tool for flexible screenshots (rectangular, window, full-screen).",
+                    "Use Snip & Sketch for quick edits and annotations.",
+                    "Use Game Bar (Win+G) for screen recordings, especially for gaming."
+                ],
+                "details": `
+                    <h2 class="text-xl font-bold mb-2">Comprehensive Guide: Taking Screenshots & Screen Recordings</h2>
+                    <p>
+                    Capturing your screen can be useful for creating tutorials, sharing information, or saving important content. This guide covers the built-in tools in Windows for taking screenshots and recording your screen.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">1. Snipping Tool</h3>
+                    <p>
+                    The Snipping Tool is a versatile screenshot utility in Windows. To use it:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Type <b>Snipping Tool</b> in the Windows search bar and open the app.</li>
+                        <li>Click <b>New</b> to take a screenshot. You can select the area you want to capture.</li>
+                        <li>After capturing, you can annotate, save, or share the screenshot directly from the tool.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">2. Snip & Sketch</h3>
+                    <p>
+                    Snip & Sketch is an updated version of the Snipping Tool with more features:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Press <b>Win+Shift+S</b> to open Snip & Sketch directly.</li>
+                        <li>Select the area of the screen you want to capture. The screenshot is copied to your clipboard.</li>
+                        <li>A notification will appear. Click it to edit or annotate the screenshot in the Snip & Sketch app.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">3. Game Bar (for Screen Recordings)</h3>
+                    <p>
+                    The Game Bar is primarily for gamers, but it can be used to record any screen activity:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Press <b>Win+G</b> to open the Game Bar.</li>
+                        <li>Click the <b>Record</b> button or press <b>Win+Alt+R</b> to start/stop recording.</li>
+                        <li>To change settings, like video quality or audio preferences, click on the <b>Settings</b> gear icon in the Game Bar.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">4. Print Screen Key</h3>
+                    <p>
+                    The Print Screen (PrtScn) key is a quick way to capture the entire screen:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Press <b>PrtScn</b> to copy the entire screen to the clipboard.</li>
+                        <li>Open an image editing program (like Paint) and paste the screenshot (<b>Ctrl+V</b>).</li>
+                        <li>Save the image in your desired format (e.g., PNG, JPEG).</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">5. Advanced Editing and Annotations</h3>
+                    <p>
+                    For advanced editing, consider using dedicated software like Greenshot, Lightshot, or ShareX. These tools offer more features like scrolling capture, advanced annotations, and direct uploads to image hosting services.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Summary</h3>
+                    <p>
+                    Windows offers several built-in tools for capturing your screen. The Snipping Tool and Snip & Sketch are great for quick screenshots, while the Game Bar (Win+G) is ideal for recording your screen, especially for gaming or tutorials.
+                    </p>
+                `
+            },
+            {
+                "title": "Boost Your Android Phone's Battery Life: Practical tips.",
+                "category": "Mobile",
+                "solutions": [
+                    "Reduce screen brightness and timeout duration.",
+                    "Limit background data and app refresh.",
+                    "Disable location services and Bluetooth when not in use.",
+                    "Use battery saver mode for essential apps only.",
+                    "Keep your device software up to date."
+                ],
+                "details": `
+                    <h2 class="text-xl font-bold mb-2">Comprehensive Guide: Boost Your Android Phone's Battery Life</h2>
+                    <p>
+                    Is your Android phone's battery draining too quickly? This guide provides practical tips and tricks to extend your battery life, from adjusting settings to managing apps.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">1. Adjust Screen Brightness and Timeout</h3>
+                    <p>
+                    The display is one of the most power-hungry components. To reduce its impact:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Go to <b>Settings</b> &gt; <b>Display</b>.</li>
+                        <li>Reduce the <b>Brightness level</b> and set a <b>shorter screen timeout</b>.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">2. Limit Background Data and App Refresh</h3>
+                    <p>
+                    Background data usage can drain your battery. To restrict it:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Open <b>Settings</b> &gt; <b>Apps & notifications</b>.</li>
+                        <li>Select the app you want to restrict.</li>
+                        <li>Tap on <b>Data usage</b> and enable <b>Background data</b> restriction.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">3. Disable Location Services and Bluetooth</h3>
+                    <p>
+                    GPS and Bluetooth can be significant battery drainers. Disable them when not in use:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Swipe down from the top of the screen to access Quick Settings.</li>
+                        <li>Tap the <b>Location</b> and <b>Bluetooth</b> icons to turn them off.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">4. Use Battery Saver Mode</h3>
+                    <p>
+                    Battery Saver mode reduces performance and limits background data to save battery life. To enable it:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Go to <b>Settings</b> &gt; <b>Battery</b>.</li>
+                        <li>Toggle on <b>Battery Saver</b>.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">5. Keep Your Device Software Up to Date</h3>
+                    <p>
+                    Software updates often include battery life improvements. To check for updates:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Open <b>Settings</b> &gt; <b>System</b> &gt; <b>Advanced system updates</b>.</li>
+                        <li>Tap on <b>Check for updates</b>.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">6. Manage App Notifications</h3>
+                    <p>
+                    Limiting app notifications can also save battery. To manage them:
+                    </p>
+                    <ol class="list-decimal pl-6 mb-2 text-stone-700">
+                        <li>Go to <b>Settings</b> &gt; <b>Apps & notifications</b>.</li>
+                        <li>Select an app and tap on <b>Notifications</b>.</li>
+                        <li>Toggle off <b>Allow notifications</b> or customize as needed.</li>
+                    </ol>
+                    <h3 class="font-semibold mt-4 mb-2">Advanced Battery Saving Tips</h3>
+                    <ul class="list-disc pl-6 mb-2 text-stone-700">
+                        <li>Use <b>Greenify</b> to hibernate apps that you don't use often.</li>
+                        <li>Disable <b>Vibration</b> in <b>Settings</b> &gt; <b>Sound</b>.</li>
+                        <li>Reduce the frequency of <b>email and app sync</b>.</li>
+                    </ul>
+                    <h3 class="font-semibold mt-4 mb-2">Summary</h3>
+                    <p>
+                    By following these tips, you can significantly extend the battery life of your Android phone, ensuring it lasts throughout the day even with heavy use.
+                    </p>
+                `
+            },
+            {
+                "title": "Emerging AI Tools for Everyday Use",
+                "category": "Emerging Tech & Fun IT",
+                "solutions": [
+                    "Try AI writing assistants for emails and documents.",
+                    "Use AI-powered photo editing apps.",
+                    "Explore AI chatbots for customer support.",
+                    "Experiment with AI voice generators for creative projects.",
+                    "Use AI transcription tools to convert audio to text.",
+                    "Try AI-based scheduling assistants to automate calendar management.",
+                    "Explore AI-powered summarization tools for long articles.",
+                    "Use AI image upscalers to enhance photo quality.",
+                    "Test AI-powered translation tools for multilingual communication."
+                ],
+                "details": `
+                    <h2 class="text-xl font-bold mb-2">Comprehensive Guide: Emerging AI Tools for Everyday Use</h2>
+                    <p>
+                    Artificial Intelligence (AI) is no longer just a concept from science fiction; it's a part of our everyday lives. This guide explores various AI tools that can help you in daily tasks, enhance your productivity, and even spark your creativity.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">1. AI Writing Assistants</h3>
+                    <p>
+                    Tools like Jasper and Grammarly use AI to help you write better. They offer suggestions for improving grammar, style, and even the tone of your writing.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">2. AI-Powered Photo Editing Apps</h3>
+                    <p>
+                    Apps like Luminar AI and Adobe Photoshop Camera use AI to enhance your photos intelligently, making complex editing tasks simple.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">3. AI Chatbots for Customer Support</h3>
+                    <p>
+                    Many websites now use AI chatbots to handle customer inquiries. These chatbots can provide 24/7 assistance and can handle a wide range of questions.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">4. AI Voice Generators</h3>
+                    <p>
+                    Tools like Descript's Overdub or Resemble AI can create realistic voiceovers for your videos or podcasts, saving you time and effort.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">5. AI Transcription Tools</h3>
+                    <p>
+                    Services like Otter.ai or Descript can transcribe your audio recordings to text quickly, making it easier to create written content from spoken material.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">6. AI-Based Scheduling Assistants</h3>
+                    <p>
+                    Tools like x.ai or Clara can automate the tedious task of scheduling meetings, finding suitable times for all participants.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">7. AI Summarization Tools</h3>
+                    <p>
+                    These tools can summarize long articles or documents, saving you time on reading. Examples include SMMRY and Resoomer.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">8. AI Image Upscalers</h3>
+                    <p>
+                    Tools like Let's Enhance or Waifu2x use AI to increase the resolution of your images without losing quality.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">9. AI Translation Tools</h3>
+                    <p>
+                    Google Translate and DeepL are examples of AI-powered translation tools that provide accurate translations between multiple languages.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Getting Started with AI Tools</h3>
+                    <p>
+                    To start using AI tools, identify repetitive tasks in your workflow that could be automated or simplified. Research and choose AI tools that fit your needs, many of which offer free trials or basic versions. Integrate these tools into your daily routine gradually, starting with one or two to avoid overwhelm.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Summary</h3>
+                    <p>
+                    AI tools offer exciting possibilities for enhancing productivity and creativity. Start exploring these tools today to find new ways to optimize your work and projects.
+                    </p>
+                `
+            },
+            {
+                "title": "Fun Coding Games for Beginners",
+                "category": "Emerging Tech & Fun IT",
+                "solutions": [
+                    "Play 'CodeCombat' to learn Python or JavaScript.",
+                    "Try 'Scratch' for visual programming.",
+                    "Explore 'Exercism' for coding practice.",
+                    "Use 'Grasshopper' app for mobile coding lessons.",
+                    "Try 'Flexbox Froggy' and 'Grid Garden' for CSS layout practice.",
+                    "Join 'Advent of Code' for daily coding challenges.",
+                    "Play 'Robocode' to learn Java by programming battle tanks.",
+                    "Try 'CheckiO' for Python and JavaScript puzzles.",
+                    "Explore 'Codingame' for gamified programming challenges."
+                ],
+                "details": `
+                    <h2 class="text-xl font-bold mb-2">Comprehensive Guide: Fun Coding Games for Beginners</h2>
+                    <p>
+                    Learning to code doesn't have to be boring! There are many games and interactive platforms that make coding fun and engaging. This guide will introduce you to some of the best coding games for beginners.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">1. CodeCombat</h3>
+                    <p>
+                    CodeCombat is an online platform that teaches you how to code by having you solve puzzles and complete tasks using real programming languages like Python and JavaScript.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">2. Scratch</h3>
+                    <p>
+                    Scratch is a visual programming language aimed at children and beginners. It uses block-based coding, which means you can create programs by stacking blocks together like building blocks.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">3. Exercism</h3>
+                    <p>
+                    Exercism offers coding exercises in various languages, with a focus on mentorship and code reviews. It's a great way to practice coding and get feedback from experienced developers.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">4. Grasshopper</h3>
+                    <p>
+                    Grasshopper is a mobile app by Google that teaches you JavaScript through fun, quick lessons. It's perfect for learning to code on the go.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">5. Flexbox Froggy and Grid Garden</h3>
+                    <p>
+                    These are two fun games that teach you CSS layout. In Flexbox Froggy, you help a frog reach its lily pad by using CSS flexbox properties. In Grid Garden, you water your garden by using CSS grid properties.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">6. Advent of Code</h3>
+                    <p>
+                    Advent of Code is a yearly set of Christmas-themed computer programming challenges. It's a fun way to improve your coding skills and get into the holiday spirit!
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">7. Robocode</h3>
+                    <p>
+                    Robocode is a programming game where you code the AI for a robot to battle against other robots. It's a fun way to learn Java and improve your problem-solving skills.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">8. CheckiO</h3>
+                    <p>
+                    CheckiO is a game and community for Python and JavaScript coders. It offers a variety of puzzles and challenges that help you improve your coding skills.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">9. Codingame</h3>
+                    <p>
+                    Codingame offers a wide range of gamified programming challenges in multiple languages. You can solve puzzles, compete in contests, and even work on real-world projects.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Benefits of Coding Games</h3>
+                    <p>
+                    Coding games offer a fun and interactive way to learn programming. They can help you improve your problem-solving skills, learn new programming concepts, and gain confidence in your coding abilities.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Getting Started with Coding Games</h3>
+                    <p>
+                    To get started, simply choose a game that interests you and create an account on the respective platform. Most of these games offer tutorials and guides to help you begin your coding journey.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Summary</h3>
+                    <p>
+                    Coding games are an excellent resource for beginners to learn programming. They provide a fun, interactive environment to practice coding and problem-solving skills.
+                    </p>
+                `
+            },
+            {
+                "title": "Fun and Useful Websites/Apps You Might Not Know.",
+                "category": "Emerging Tech & Fun IT",
+                "solutions": [
+                    "Explore websites like 'FutureMe' to receive letters from your future self.",
+                    "Use 'Noisli' for customizable background noise to improve focus.",
+                    "Check out 'Pocket' to save articles and videos for later viewing.",
+                    "Discover 'IFTTT' to automate tasks between different apps and services.",
+                    "Visit 'Canva' for easy-to-use graphic design tools.",
+                    "Try 'Window Swap' to view video windows from around the world.",
+                    "Use 'Radio Garden' to listen to live radio from anywhere.",
+                    "Explore 'GeoGuessr' for a fun geography challenge.",
+                    "Try 'A Soft Murmur' for relaxing ambient sounds.",
+                    "Use 'Remove.bg' to instantly remove image backgrounds."
+                ],
+                "details": `
+                    <h2 class="text-xl font-bold mb-2">Comprehensive Guide: Fun and Useful Websites/Apps</h2>
+                    <p>
+                    The internet is full of hidden gems that can boost your productivity, creativity, and fun. This guide explores various websites and apps that you might not know about but can be incredibly useful in your daily life.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">1. FutureMe</h3>
+                    <p>
+                    FutureMe allows you to write a letter to your future self and have it emailed to you at a later date. It's a great way to set goals, make plans, or just leave a message for yourself.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">2. Noisli</h3>
+                    <p>
+                    Noisli is a website and app that lets you create customizable background noise mixes. It's perfect for improving focus, relaxation, or sleep.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">3. Pocket</h3>
+                    <p>
+                    Pocket is a read-it-later app that lets you save articles, videos, and other web content for later viewing. You can access your saved content from any device, even offline.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">4. IFTTT</h3>
+                    <p>
+                    IFTTT (If This Then That) is a powerful automation tool that connects different apps and services. You can create custom automations, like saving email attachments to cloud storage or getting notifications for important events.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">5. Canva</h3>
+                    <p>
+                    Canva is a user-friendly graphic design tool that offers a wide range of templates and design elements. You can create stunning graphics, presentations, and social media posts without any design experience.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">6. Window Swap</h3>
+                    <p>
+                    Window Swap lets you view short video clips of windows around the world, submitted by other users. It's a fun way to experience different places and get inspired.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">7. Radio Garden</h3>
+                    <p>
+                    Radio Garden is a 3D globe interface that lets you listen to live radio from across the globe. You can explore radio stations by navigating the globe and discover new music and cultures.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">8. GeoGuessr</h3>
+                    <p>
+                    GeoGuessr is a geography game that drops you in an unknown location on Google Maps, and you have to guess where you are. It's a fun and educational game that challenges your knowledge of the world.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">9. A Soft Murmur</h3>
+                    <p>
+                    A Soft Murmur lets you mix ambient sounds to create your perfect relaxing or focusing soundscape. You can choose from a variety of sounds, like rain, thunder, waves, and more.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">10. Remove.bg</h3>
+                    <p>
+                    Remove.bg is a simple tool that uses AI to remove the background from images. It's perfect for creating professional-looking graphics and photos.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Discovering More Useful Websites and Apps</h3>
+                    <p>
+                    To find more hidden gems on the internet, consider browsing sites like Product Hunt or AlternativeTo. These platforms showcase new and interesting websites and apps regularly.
+                    </p>
+                    <h3 class="font-semibold mt-4 mb-2">Summary</h3>
+                    <p>
+                    Exploring new tools can help you work smarter, stay organized, and have more fun online. Don't hesitate to try out new websites and apps that can improve your productivity and creativity.
+                    </p>
+                `
+            },
+            // --- Additional topics for more categories ---
+            {
+                "title": "macOS Won't Boot",
+                "category": "macOS",
+                "solutions": [
+                    "Reset NVRAM/PRAM by holding Option+Command+P+R at startup.",
+                    "Boot into Safe Mode by holding Shift during startup.",
+                    "Use Disk Utility in Recovery Mode to repair your disk."
+                ]
+            },
+            {
+                "title": "Time Machine Backup Issues",
+                "category": "macOS",
+                "solutions": [
+                    "Check your backup disk connection and free space.",
+                    "Restart your Mac and try again.",
+                    "Re-add your backup disk in Time Machine preferences."
+                ]
+            },
+            {
+                "title": "iPhone Not Charging",
+                "category": "Mobile",
+                "solutions": [
+                    "Try a different charging cable and adapter.",
+                    "Clean the charging port carefully.",
+                    "Restart your iPhone or update iOS."
+                ]
+            },
+            {
+                "title": "Android App Crashes",
+                "category": "Mobile",
+                "solutions": [
+                    "Clear the app's cache and data.",
+                    "Update the app to the latest version.",
+                    "Restart your device."
+                ]
+            },
+            {
+                "title": "Wi-Fi Keeps Disconnecting",
+                "category": "Network",
+                "solutions": [
+                    "Restart your router and device.",
+                    "Forget and reconnect to the Wi-Fi network.",
+                    "Update your network drivers or firmware."
+                ]
+            },
+            {
+                "title": "Browser Extensions Not Working",
+                "category": "Web Browser",
+                "solutions": [
+                    "Update your browser to the latest version.",
+                    "Disable and re-enable the extension.",
+                    "Check for extension conflicts or reinstall the extension."
+                ]
+            },
+            {
+                "title": "Google Chrome Slow",
+                "category": "Web Browser",
+                "solutions": [
+                    "Clear browsing data and cache.",
+                    "Disable unnecessary extensions.",
+                    "Reset Chrome settings to default."
+                ]
+            },
+            {
+                "title": "Microsoft Office Activation Issues",
+                "category": "Software",
+                "solutions": [
+                    "Sign in with the correct Microsoft account.",
+                    "Check your subscription status.",
+                    "Run the Office Activation Troubleshooter."
+                ]
+            },
+            {
+                "title": "External Hard Drive Not Detected",
+                "category": "Hardware",
+                "solutions": [
+                    "Try a different USB port or cable.",
+                    "Check Disk Management (Windows) or Disk Utility (macOS).",
+                    "Update or reinstall device drivers."
+                ]
+            },
+            {
+                "title": "Bluetooth Not Pairing",
+                "category": "Hardware",
+                "solutions": [
+                    "Turn Bluetooth off and on again.",
+                    "Remove and re-add the device.",
+                    "Update Bluetooth drivers or firmware."
+                ]
+            },
+            {
+                "title": "VPN Connection Drops Frequently",
+                "category": "Network",
+                "solutions": [
+                    "Switch to a different VPN server.",
+                    "Check your internet connection stability.",
+                    "Update your VPN client software."
+                ]
+            },
+            {
+                "title": "Phishing Email Detection",
+                "category": "Security",
+                "solutions": [
+                    "Check sender address and suspicious links.",
+                    "Do not download unexpected attachments.",
+                    "Report phishing emails to your provider."
+                ]
+            },
+            {
+                "title": "Two-Factor Authentication Setup",
+                "category": "Security",
+                "solutions": [
+                    "Enable 2FA in your account security settings.",
+                    "Use an authenticator app or SMS codes.",
+                    "Store backup codes in a safe place."
+                ]
+            },
+            {
+                "title": "Cloud Storage Sync Issues",
+                "category": "Productivity",
+                "solutions": [
+                    "Check your internet connection.",
+                    "Restart the sync client.",
+                    "Ensure you have enough storage space."
+                ]
+            },
+            {
+                "title": "Keyboard Shortcuts for Productivity",
+                "category": "Productivity",
+                "solutions": [
+                    "Learn common shortcuts for your OS and apps.",
+                    "Customize shortcuts for frequent actions.",
+                    "Practice using shortcuts daily."
+                ]
+            },
+            {
+                "title": "Emerging AI Tools for Everyday Use",
+                "category": "Emerging Tech & Fun IT",
+                "solutions": [
+                    "Try AI writing assistants for emails and documents.",
+                    "Use AI-powered photo editing apps.",
+                    "Explore AI chatbots for customer support.",
+                    "Experiment with AI voice generators for creative projects.",
+                    "Use AI transcription tools to convert audio to text.",
+                    "Try AI-based scheduling assistants to automate calendar management.",
+                    "Explore AI-powered summarization tools for long articles.",
+                    "Use AI image upscalers to enhance photo quality.",
+                    "Test AI-powered translation tools for multilingual communication."
+                ]
+            },
+            {
+                "title": "Fun Coding Games for Beginners",
+                "category": "Emerging Tech & Fun IT",
+                "solutions": [
+                    "Play 'CodeCombat' to learn Python or JavaScript.",
+                    "Try 'Scratch' for visual programming.",
+                    "Explore 'Exercism' for coding practice.",
+                    "Use 'Grasshopper' app for mobile coding lessons.",
+                    "Try 'Flexbox Froggy' and 'Grid Garden' for CSS layout practice.",
+                    "Join 'Advent of Code' for daily coding challenges.",
+                    "Play 'Robocode' to learn Java by programming battle tanks.",
+                    "Try 'CheckiO' for Python and JavaScript puzzles.",
+                    "Explore 'Codingame' for gamified programming challenges."
+                ]
+            },
+            {
+                "title": "Fun and Useful Websites/Apps You Might Not Know.",
+                "category": "Emerging Tech & Fun IT",
+                "solutions": [
+                    "Explore websites like 'FutureMe' to receive letters from your future self.",
+                    "Use 'Noisli' for customizable background noise to improve focus.",
+                    "Check out 'Pocket' to save articles and videos for later viewing.",
+                    "Discover 'IFTTT' to automate tasks between different apps and services.",
+                    "Visit 'Canva' for easy-to-use graphic design tools.",
+                    "Try 'Window Swap' to view video windows from around the world.",
+                    "Use 'Radio Garden' to listen to live radio from anywhere.",
+                    "Explore 'GeoGuessr' for a fun geography challenge.",
+                    "Try 'A Soft Murmur' for relaxing ambient sounds.",
+                    "Use 'Remove.bg' to instantly remove image backgrounds."
+                ]
+            }
+        ];
+
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Helper: get a placeholder image based on topic title
+        function getTopicImage(title) {
+            // You can customize this mapping or use a service like Unsplash
+            const images = {
+                "Windows 11 Activation": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "Slow Computer Performance": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
+                "Software Installation Issues": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+                "Network Connectivity Problems": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+                "Printer Not Responding": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
+                "Blue Screen Errors": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+                "File Explorer Crashes": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80",
+                "Application Compatibility": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "Malware Infection": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+                "Data Recovery": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+                "Windows Update Failures": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
+                "Dual Boot Setup": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "Overheating Laptop": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
+                "SSD Installation": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "RAM Upgrade": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Features": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+                "File Backup Solutions": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80",
+                "System Restore Points": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+                "Windows Security Features": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+                "Command Prompt Tricks": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "PowerShell Basics": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Customization": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+                "Accessibility Features": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Shortcuts": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+                "Virtual Desktops": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+                "Snap Layouts and Groups": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Widgets": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "Gaming on Windows 11": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Troubleshooting": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Installation Media": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 System Requirements": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Features Overview": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Privacy Settings": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Backup and Restore": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Security Overview": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Accessibility Improvements": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Performance Optimization": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Common Issues": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "Windows 11 Tips and Tricks": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+                "Speed Up Windows Startup: Top 5 tweaks for a faster boot.": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
+                "Disk Cleanup Like a Pro: Freeing up space you didn't know you had.": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "Solving \"Not Responding\" Errors: What to do when an app freezes.": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+                "Creating Strong, Unique Passwords (and Managing Them).": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "How to Take Screenshots & Screen Recordings (Built-in tools).": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
+                "Boost Your Android Phone's Battery Life: Practical tips.": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80",
+                "Emerging AI Tools for Everyday Use": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "Fun Coding Games for Beginners": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "Fun and Useful Websites/Apps You Might Not Know.": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+                "macOS Won't Boot": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "Time Machine Backup Issues": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+                "iPhone Not Charging": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "Android App Crashes": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+                "Wi-Fi Keeps Disconnecting": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+                "Browser Extensions Not Working": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
+                "Google Chrome Slow": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "Microsoft Office Activation Issues": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "External Hard Drive Not Detected": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+                "Bluetooth Not Pairing": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "VPN Connection Drops Frequently": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "Phishing Email Detection": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+                "Two-Factor Authentication Setup": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "Cloud Storage Sync Issues": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+                "Keyboard Shortcuts for Productivity": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+                "Emerging AI Tools for Everyday Use": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "Fun Coding Games for Beginners": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80"
+            };
+            return images[title] || "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80";
+        }
+
+        // Helper: get YouTube reference link placeholder
+        function getYoutubeLink(title) {
+            // All topics now link to the main YouTube video
+            return "https://youtu.be/p4kQbt0QUkY";
+        }
+
+        function renderTopicDetails() {
+            const title = getQueryParam('title');
+            const topic = topicsData.find(t => t.title === title);
+
+            const container = document.getElementById('topicDetails');
+            if (!topic) {
+                container.innerHTML = `<p class="text-center text-red-600">Topic not found.</p>`;
+                return;
+            }
+
+            const topicImage = getTopicImage(topic.title);
+            const youtubeLink = getYoutubeLink(topic.title);
+            const moreContext = topic.details || `<p>No detailed guide available for this topic yet.</p>`;
+
+            container.innerHTML = `
+                <img src="${topicImage}" alt="Topic Image" class="w-full h-48 object-cover rounded mb-4">
+                <h2 class="text-2xl font-bold text-teal-700 mb-2">${topic.title}</h2>
+                <p class="mb-4 text-stone-500">Category: ${topic.category}</p>
+                ${topic.solutions && topic.solutions.length > 0 ? `
+                    <h3 class="text-lg font-semibold mb-1">Quick Solutions:</h3>
+                    <ul class="list-disc pl-6 mb-4 text-stone-700">
+                        ${topic.solutions.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                ` : ''}
+                <div class="mt-4 p-4 bg-stone-50 rounded border border-stone-200">
+                    <h4 class="font-semibold mb-2">More Context &amp; Explanation</h4>
+                    ${moreContext}
+                </div>
+                <div class="mt-4">
+                    <a href="${youtubeLink}" target="_blank" class="text-blue-600 underline">Watch on YouTube</a>
+                </div>
+            `;
+        }
+
+        // PDF Download
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTopicDetails();
+            document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+                const element = document.getElementById('topicDetails');
+                html2pdf().from(element).set({
+                    margin: 0.5,
+                    filename: 'IT_Topic_Details.pdf',
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                }).save();
+            });
+        });
+    </script>
+</body>
+</html>

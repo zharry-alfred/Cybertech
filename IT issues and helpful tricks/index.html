@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube IT Topic Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Visualization & Content Choices:
+        - Report Info: Categorized list of YouTube IT topic ideas.
+        - Goal: Enable users to easily browse, filter, and search topics.
+        - Viz/Presentation Method:
+            - Categories: Interactive Tailwind-styled buttons.
+            - Topics: Dynamically generated list of Tailwind-styled cards or list items.
+            - Search: HTML input field.
+        - Interaction:
+            - Category buttons: Click to filter topics (JS).
+            - Search input: Type to filter topics (JS).
+        - Justification: This provides a direct and intuitive way to interact with and explore the list-based content. No complex visualizations are needed; clear textual presentation with filtering is most effective.
+        - Library/Method: Vanilla JavaScript for logic, Tailwind CSS for styling.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Tailwind default is often Inter, ensuring it */
+        }
+        .active-filter {
+            background-color: #0D9488 !important; /* A darker teal for active state */
+            color: white !important;
+        }
+        /* Custom scrollbar for better aesthetics - optional */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F3F4F6; /* bg-gray-100 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9CA3AF; /* bg-gray-400 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280; /* bg-gray-500 */
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800 min-h-screen flex flex-col">
+
+    <header class="bg-stone-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <h1 class="text-2xl sm:text-3xl font-bold text-center">YouTube IT Topic Explorer</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+        <div class="bg-white shadow-xl rounded-lg p-6 mb-8">
+            <p class="text-stone-700 mb-4 text-center">
+                Welcome to the IT Topic Explorer! This tool helps you discover and organize video ideas for your YouTube channel focused on IT tricks and troubleshooting.
+                Use the category filters or the search bar below to narrow down your options from over 100 curated topics. Click on a category to see its topics, or type keywords to find specific ideas.
+            </p>
+            <div class="mb-6 flex flex-col sm:flex-row gap-4 items-center">
+                <input type="text" id="searchInput" placeholder="Search topics..." class="flex-grow p-3 border border-stone-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition duration-150 w-full sm:w-auto">
+                <button id="clearSearchButton" class="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 px-5 rounded-lg shadow-md hover:shadow-lg transition duration-150 w-full sm:w-auto">Clear Search</button>
+            </div>
+            <div id="categoryFilters" class="flex flex-wrap gap-2 justify-center mb-6">
+                </div>
+        </div>
+
+        <div id="topicsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+        <div id="noResultsMessage" class="hidden text-center text-stone-600 text-xl py-10">
+            No topics found matching your criteria.
+        </div>
+    </main>
+
+    <footer class="bg-stone-800 text-white py-4 mt-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; 2025 Your Channel Name. Powered by IT Topic Explorer.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Topic Data Template ---
+        /*
+        {
+            category: "Category Name",
+            title: "Topic Title",
+            solutions: [
+                "Quick solution 1.",
+                "Quick solution 2.",
+                // ...more quick solutions...
+            ],
+            // Optionally, add a 'details' property for a long-form HTML guide:
+            details: `
+                <h2>Detailed Guide Title</h2>
+                <p>Full HTML-formatted explanation, steps, images, etc.</p>
+                <!-- Use headings, lists, and formatting as needed -->
+            `
+        }
+        */
+
+        const topicsData = [
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Speed Up Windows Startup: Top 5 tweaks for a faster boot.",
+                solutions: [
+                    "Disable unnecessary startup programs via Task Manager.",
+                    "Turn off fast startup if causing issues.",
+                    "Update drivers and Windows regularly.",
+                    "Defragment your hard drive (HDD only).",
+                    "Scan for malware or viruses.",
+                    "Check for firmware/BIOS updates."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Disk Cleanup Like a Pro: Freeing up space you didn't know you had.",
+                solutions: [
+                    "Use Windows Disk Cleanup tool.",
+                    "Remove old Windows update files.",
+                    "Uninstall unused programs.",
+                    "Clear browser cache and temp files.",
+                    "Delete large files from Downloads folder.",
+                    "Move files to external storage or cloud."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Solving \"Not Responding\" Errors: What to do when an app freezes.",
+                solutions: [
+                    "Wait a few moments for the app to recover.",
+                    "Use Task Manager to end the task.",
+                    "Update or reinstall the problematic application.",
+                    "Check for Windows updates.",
+                    "Scan for malware.",
+                    "Check for low memory or disk space."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Customizing the Windows Taskbar: Make it work for you.",
+                solutions: [
+                    "Pin frequently used apps.",
+                    "Change taskbar location and size.",
+                    "Use taskbar toolbars (address, links, etc).",
+                    "Hide or show system icons.",
+                    "Enable or disable taskbar transparency."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Understanding Windows Update Errors: Common codes and fixes.",
+                solutions: [
+                    "Run Windows Update Troubleshooter.",
+                    "Check your internet connection.",
+                    "Clear the Windows Update cache.",
+                    "Restart your PC.",
+                    "Look up error codes on Microsoft’s support site."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Creating a System Restore Point: Your safety net for Windows.",
+                solutions: [
+                    "Search for 'Create a restore point' in the Start menu.",
+                    "Select your system drive (usually C:) and click Configure.",
+                    "Ensure 'Turn on system protection' is selected.",
+                    "Click 'Create' and follow the prompts."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Managing User Accounts & Permissions: A quick guide.",
+                solutions: [
+                    "Open Control Panel and go to User Accounts.",
+                    "Select 'Manage another account' to view all accounts.",
+                    "Choose an account to change its type or delete it.",
+                    "Use 'Family & other users' for managing permissions."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Finding Lost Files in Windows: Beyond the Recycle Bin.",
+                solutions: [
+                    "Use File History to restore deleted files.",
+                    "Check cloud backups (OneDrive, Google Drive).",
+                    "Use data recovery software as a last resort."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Troubleshooting Printer Offline Issues (Windows).",
+                solutions: [
+                    "Check printer connections and power.",
+                    "Ensure the printer is set as default.",
+                    "Run the Printer Troubleshooter in Windows.",
+                    "Update or reinstall printer drivers."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Using Windows Task Manager Effectively: More than just ending tasks.",
+                solutions: [
+                    "Use Task Manager to monitor system performance.",
+                    "Identify resource-hungry applications.",
+                    "Disable startup programs that slow down boot time."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Fixing \"No Sound\" Issues on Windows.",
+                solutions: [
+                    "Check if the sound is muted or low.",
+                    "Ensure the correct playback device is selected.",
+                    "Update or reinstall audio drivers.",
+                    "Run the Audio Troubleshooter in Windows."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "How to Take Screenshots & Screen Recordings (Built-in tools).",
+                solutions: [
+                    "Use Snipping Tool or Snip & Sketch for screenshots.",
+                    "Press Win + G to open Game Bar for screen recording.",
+                    "Adjust settings for quality and format as needed."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Defragmentation Explained: Does your PC still need it?",
+                solutions: [
+                    "Open 'Defragment and Optimize Drives' from the Start menu.",
+                    "Select your hard drive and click 'Optimize'.",
+                    "Schedule regular defragmentation (e.g., weekly)."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Setting Up and Using Virtual Desktops in Windows.",
+                solutions: [
+                    "Press Win + Tab and select 'New Desktop'.",
+                    "Drag windows to the new desktop to organize tasks.",
+                    "Use virtual desktops to separate work and personal tasks."
+                ]
+            },
+            { 
+                category: "Windows OS Tips & Troubleshooting", 
+                title: "Quick Fixes for Common Blue Screen of Death (BSOD) errors.",
+                solutions: [
+                    "Restart your computer.",
+                    "Check for recent hardware or software changes.",
+                    "Run Windows Memory Diagnostic.",
+                    "Use System Restore to revert to a previous state."
+                ]
+            },
+            { 
+                category: "macOS Tips & Troubleshooting", 
+                title: "Speeding Up Your Mac: Simple tricks for better performance.",
+                solutions: [
+                    "Close unused apps and browser tabs.",
+                    "Remove login items in System Preferences.",
+                    "Free up disk space using Storage Management.",
+                    "Update macOS and all apps.",
+                    "Reset SMC and PRAM if needed."
+                ]
+            },
+            { 
+                category: "macOS Tips & Troubleshooting", 
+                title: "Mac Storage Management: \"Other\" storage explained and cleared.",
+                solutions: [
+                    "Use About This Mac > Storage > Manage.",
+                    "Delete old iOS backups and cache files.",
+                    "Empty Trash and Downloads.",
+                    "Remove unused applications.",
+                    "Clear system logs and temporary files."
+                ]
+            },
+            { 
+                category: "macOS Tips & Troubleshooting", 
+                title: "Force Quitting Applications on Mac: The right way.",
+                solutions: [
+                    "Right-click the app in the Dock and select 'Force Quit'.",
+                    "Use Command + Option + Esc to open Force Quit Applications window.",
+                    "Select the unresponsive app and click 'Force Quit'."
+                ]
+            },
+            { 
+                category: "macOS Tips & Troubleshooting", 
+                title: "Using Spotlight Search Like a Power User.",
+                solutions: [
+                    "Press Command + Space to open Spotlight.",
+                    "Type your query and use Command + Enter to open in Finder.",
+                    "Use Spotlight for quick calculations and conversions."
+                ]
+            },
+            { 
+                category: "macOS Tips & Troubleshooting", 
+                title: "Troubleshooting Wi-Fi Connection Drops on Mac.",
+                solutions: [
+                    "Forget the Wi-Fi network and reconnect.",
+                    "Reset the SMC and NVRAM.",
+                    "Check for software updates.",
+                    "Run Wireless Diagnostics from the Wi-Fi menu."
+                ]
+            },
+            { 
+                category: "macOS Tips & Troubleshooting", 
+                title: "Customizing the Dock and Menu Bar on macOS.",
+                solutions: [
+                    "Drag and drop apps to/from the Dock to customize.",
+                    "Right-click the Dock divider to adjust size and position.",
+                    "Use System Preferences > Dock & Menu Bar for more options."
+                ]
+            },
+            { 
+                category: "macOS Tips & Troubleshooting", 
+                title: "Understanding and Using Time Machine for Backups.",
+                solutions: [
+                    "Connect an external drive and select it as the backup disk.",
+                    "Time Machine automatically backs up your Mac hourly, daily, and weekly.",
+                    "To restore, enter Time Machine and select the files or system state."
+                ]
+            },
+            { 
+                category: "macOS Tips & Troubleshooting", 
+                title: "Fixing \"Beach Ball of Death\" (Spinning Pinwheel).",
+                solutions: [
+                    "Force quit the unresponsive application.",
+                    "Check Activity Monitor for resource-hungry processes.",
+                    "Restart your Mac.",
+                    "Reset NVRAM and SMC if the problem persists."
+                ]
+            },
+            { 
+                category: "macOS Tips & Troubleshooting", 
+                title: "Screenshot and Screen Recording Shortcuts on Mac.",
+                solutions: [
+                    "Command + Shift + 3: Capture entire screen.",
+                    "Command + Shift + 4: Capture selected portion.",
+                    "Command + Shift + 5: Open screenshot toolbar for options."
+                ]
+            },
+            { 
+                category: "macOS Tips & Troubleshooting", 
+                title: "Managing Startup Items to Improve Boot Time (macOS).",
+                solutions: [
+                    "Go to System Preferences > Users & Groups.",
+                    "Select your user account and click 'Login Items'.",
+                    "Remove unnecessary items from the list."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Boost Your Android Phone's Battery Life: Practical tips.",
+                solutions: [
+                    "Reduce screen brightness and timeout duration.",
+                    "Disable unnecessary background apps and processes.",
+                    "Use Battery Saver mode.",
+                    "Keep the software and apps updated."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Improve iPhone Battery Performance: Settings to change now.",
+                solutions: [
+                    "Enable Low Power Mode.",
+                    "Reduce screen brightness and disable Always-On display.",
+                    "Limit background app refresh and location services.",
+                    "Update to the latest iOS version."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Clearing Cache & Data on Android Apps: When and why.",
+                solutions: [
+                    "Go to Settings > Apps > [App Name] > Storage.",
+                    "Tap 'Clear Cache' and 'Clear Data'.",
+                    "Reinstall the app if it misbehaves after clearing data."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Troubleshooting App Crashes on iOS/Android.",
+                solutions: [
+                    "Update the app to the latest version.",
+                    "Restart your device.",
+                    "Reinstall the app.",
+                    "Check device storage and free up space if low."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Managing App Permissions for Better Privacy (iOS & Android).",
+                solutions: [
+                    "Go to Settings > Privacy > [Relevant Section]",
+                    "Review and adjust permissions for each app.",
+                    "Disable permissions that seem unnecessary."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Freeing Up Storage Space on Your Smartphone (General).",
+                solutions: [
+                    "Delete unused apps and large files.",
+                    "Clear app caches and data.",
+                    "Move photos and videos to cloud storage.",
+                    "Uninstall updates for system apps (if possible)."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Fixing \"No Service\" or Poor Signal Issues.",
+                solutions: [
+                    "Toggle Airplane Mode on and off.",
+                    "Restart your phone.",
+                    "Check for carrier settings update.",
+                    "Reset network settings if the problem persists."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "How to Properly Back Up Your Smartphone (Cloud & Local).",
+                solutions: [
+                    "Use built-in cloud backup (Google Drive, iCloud).",
+                    "Connect to a computer and use backup software.",
+                    "Regularly update your backup to avoid data loss."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Using \"Find My iPhone\" / \"Find My Device\" (Android).",
+                solutions: [
+                    "Enable location services and sign in to your account.",
+                    "Use the respective app or website to locate your device.",
+                    "Follow the provided steps to recover or secure your device."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Screen Mirroring Your Phone to a TV/Computer.",
+                solutions: [
+                    "Ensure both devices are on the same Wi-Fi network.",
+                    "Use the screen mirroring option in your phone's settings.",
+                    "Select the target device and follow the prompts."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Customizing Your Phone's Home Screen for Productivity.",
+                solutions: [
+                    "Organize apps into folders by category.",
+                    "Place frequently used apps/widgets on the home screen.",
+                    "Remove or hide unused apps to declutter."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Troubleshooting Bluetooth Pairing Problems.",
+                solutions: [
+                    "Ensure both devices are in pairing mode.",
+                    "Forget the device in Bluetooth settings and re-pair.",
+                    "Check for software updates for both devices."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Quick Fixes for a Phone That Won't Charge.",
+                solutions: [
+                    "Check the charging cable and adapter for damage.",
+                    "Clean the charging port on the phone.",
+                    "Try a different power source or cable.",
+                    "Restart the phone and try charging again."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "Understanding and Managing Mobile Data Usage.",
+                solutions: [
+                    "Go to Settings > Cellular/Data Usage.",
+                    "Monitor data usage by app and limit background data.",
+                    "Consider upgrading your data plan if you frequently run out of data."
+                ]
+            },
+            { 
+                category: "Mobile (Android & iOS) Tips & Troubleshooting", 
+                title: "How to Spot and Remove Malware from Your Phone.",
+                solutions: [
+                    "Install a reputable mobile security app.",
+                    "Regularly scan your device for malware.",
+                    "Avoid installing apps from unknown sources."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Clearing Browser Cache & Cookies: Why and how.",
+                solutions: [
+                    "Go to browser settings/privacy settings.",
+                    "Find the options for clearing browsing data.",
+                    "Select cache and cookies, then confirm the action."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Managing Browser Extensions: The good, the bad, and the ugly.",
+                solutions: [
+                    "Regularly review installed extensions.",
+                    "Remove extensions you no longer use.",
+                    "Keep essential extensions updated."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Speeding Up Your Web Browser: Top 5 tweaks.",
+                solutions: [
+                    "Disable unnecessary extensions and plugins.",
+                    "Clear cache and cookies regularly.",
+                    "Update your browser to the latest version.",
+                    "Enable hardware acceleration in browser settings."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Using Incognito/Private Browsing Effectively.",
+                solutions: [
+                    "Right-click on a link and select 'Open link in incognito window'.",
+                    "Use keyboard shortcuts: Ctrl+Shift+N (Windows) or Command+Shift+N (Mac).",
+                    "Remember that downloads and bookmarks are still saved."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Customizing Your Browser's New Tab Page.",
+                solutions: [
+                    "Go to browser settings and find 'New Tab' options.",
+                    "Choose a blank page, a specific website, or a custom dashboard.",
+                    "Arrange shortcuts to your most visited sites."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Troubleshooting \"Page Not Loading\" Errors.",
+                solutions: [
+                    "Check your internet connection.",
+                    "Clear browser cache and cookies.",
+                    "Disable extensions that might interfere with loading.",
+                    "Try accessing the page in another browser."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Syncing Bookmarks & History Across Devices.",
+                solutions: [
+                    "Sign in to your browser account (e.g., Chrome, Firefox).",
+                    "Enable sync for bookmarks, history, and tabs.",
+                    "Check sync settings on all devices."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Blocking Pop-ups and Annoying Ads.",
+                solutions: [
+                    "Enable the built-in pop-up blocker in browser settings.",
+                    "Install an ad blocker extension.",
+                    "Adjust privacy settings to block third-party cookies."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Keyboard Shortcuts for Faster Browsing (Top 10).",
+                solutions: [
+                    "Ctrl+C / Cmd+C: Copy",
+                    "Ctrl+V / Cmd+V: Paste",
+                    "Ctrl+Z / Cmd+Z: Undo",
+                    "Alt+Tab / Cmd+Tab: Switch apps",
+                    "Ctrl+F / Cmd+F: Find"
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Managing Saved Passwords in Your Browser Securely.",
+                solutions: [
+                    "Use the built-in password manager in your browser.",
+                    "Regularly update your passwords.",
+                    "Enable two-factor authentication for added security."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Fixing \"Aw, Snap!\" (Chrome) or Similar Crash Errors.",
+                solutions: [
+                    "Reload the page.",
+                    "Clear browser cache and cookies.",
+                    "Disable problematic extensions.",
+                    "Update or reinstall the browser."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "How to Identify and Avoid Phishing Websites.",
+                solutions: [
+                    "Look for HTTPS and a padlock icon in the address bar.",
+                    "Be cautious of links in unsolicited emails or messages.",
+                    "Use a website safety checker tool."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Using Browser Developer Tools for Simple Web Fixes (e.g., inspecting elements)." },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Setting a Default Browser and Search Engine.",
+                solutions: [
+                    "Go to system settings or control panel.",
+                    "Find the default apps or programs section.",
+                    "Select your preferred browser and search engine."
+                ]
+            },
+            { 
+                category: "Web Browser Tips & Tricks", 
+                title: "Organizing Your Bookmarks/Favorites for Quick Access.",
+                solutions: [
+                    "Create folders for different categories of bookmarks.",
+                    "Regularly review and remove outdated bookmarks.",
+                    "Use a bookmark manager extension for advanced options."
+                ]
+            },
+            { 
+                category: "Software & Application Fixes", 
+                title: "Microsoft Office: Fixing Common \"Not Responding\" Issues.",
+                solutions: [
+                    "Update Office to the latest version.",
+                    "Disable add-ins that may be causing issues.",
+                    "Repair the Office installation via Control Panel."
+                ]
+            },
+            { 
+                category: "Software & Application Fixes", 
+                title: "Outlook/Email Client: Troubleshooting Sending/Receiving Problems.",
+                solutions: [
+                    "Check your internet connection.",
+                    "Verify email account settings.",
+                    "Look for large attachments slowing down the process.",
+                    "Clear the Outlook cache."
+                ]
+            },
+            { 
+                category: "Software & Application Fixes", 
+                title: "PDF Reader: Common Issues and How to Fix Them (e.g., can't open, slow).",
+                solutions: [
+                    "Update your PDF reader to the latest version.",
+                    "Try opening the PDF in a different reader or browser.",
+                    "Check for software conflicts or disable protected mode."
+                ]
+            },
+            { 
+                category: "Software & Application Fixes", 
+                title: "Video Conferencing Apps (Zoom, Teams): Fixing Audio/Video Glitches.",
+                solutions: [
+                    "Check your internet connection and speed.",
+                    "Update the app to the latest version.",
+                    "Adjust audio and video settings in the app.",
+                    "Restart your device and try again."
+                ]
+            },
+            { 
+                category: "Software & Application Fixes", 
+                title: "What to Do When Software Installation Fails.",
+                solutions: [
+                    "Check for sufficient disk space.",
+                    "Disable antivirus or firewall temporarily.",
+                    "Run the installer as an administrator.",
+                    "Ensure your system meets the software requirements."
+                ]
+            },
+            { 
+                category: "Software & Application Fixes", 
+                title: "Running Software in Compatibility Mode.",
+                solutions: [
+                    "Right-click the software shortcut and select 'Properties'.",
+                    "Go to the 'Compatibility' tab.",
+                    "Check 'Run this program in compatibility mode for:' and select an OS."
+                ]
+            },
+            { 
+                category: "Software & Application Fixes", 
+                title: "Understanding and Managing Software Licenses.",
+                solutions: [
+                    "Keep a record of all software licenses and keys.",
+                    "Know the difference between OEM, Retail, and Volume licenses.",
+                    "Be aware of the license terms and conditions."
+                ]
+            },
+            { 
+                category: "Software & Application Fixes", 
+                title: "How to Properly Uninstall Software to Avoid Leftover Files.",
+                solutions: [
+                    "Use the built-in uninstaller in Control Panel or Settings.",
+                    "Follow up with a registry cleaner if comfortable.",
+                    "Manually delete leftover files in Program Files and AppData."
+                ]
+            },
+            { 
+                category: "Software & Application Fixes", 
+                title: "Fixing Corrupted File Errors (e.g., Word document, Excel file).",
+                solutions: [
+                    "Try opening the file in a different program.",
+                    "Use the 'Open and Repair' feature in Office applications.",
+                    "Restore the file from a backup if available."
+                ]
+            },
+            { 
+                category: "Software & Application Fixes", 
+                title: "Troubleshooting Cloud Sync Issues (Dropbox, OneDrive, Google Drive).",
+                solutions: [
+                    "Check your internet connection.",
+                    "Ensure the cloud service is not down.",
+                    "Pause and resume syncing in the cloud app.",
+                    "Reinstall the cloud app if necessary."
+                ]
+            },
+            { 
+                category: "Hardware & Peripherals", 
+                title: "Troubleshooting a Mouse or Keyboard That's Not Working.",
+                solutions: [
+                    "Check the connection (USB or Bluetooth).",
+                    "Replace the batteries if wireless.",
+                    "Try the device on another computer.",
+                    "Update or reinstall drivers if needed."
+                ]
+            },
+            { 
+                category: "Hardware & Peripherals", 
+                title: "Fixing Monitor Display Issues (No signal, flickering, wrong resolution).",
+                solutions: [
+                    "Check the cable connections between the monitor and computer.",
+                    "Try a different cable or port.",
+                    "Adjust the display settings in your operating system.",
+                    "Update graphics drivers."
+                ]
+            },
+            { 
+                category: "Hardware & Peripherals", 
+                title: "USB Device Not Recognized: Common Fixes.",
+                solutions: [
+                    "Try a different USB port.",
+                    "Restart your computer.",
+                    "Update USB drivers.",
+                    "Check the device on another computer."
+                ]
+            },
+            { 
+                category: "Hardware & Peripherals", 
+                title: "Webcam Not Working? Try These Steps.",
+                solutions: [
+                    "Check if the webcam is enabled in device settings.",
+                    "Update or reinstall webcam drivers.",
+                    "Test the webcam in another application."
+                ]
+            },
+            { 
+                category: "Hardware & Peripherals", 
+                title: "Basic Printer Troubleshooting: Paper Jams, Smudges, Offline.",
+                solutions: [
+                    "Check for paper jams and remove any stuck paper.",
+                    "Clean the printer heads and rollers.",
+                    "Ensure the printer is online and connected to the network."
+                ]
+            },
+            { 
+                category: "Hardware & Peripherals", 
+                title: "External Hard Drive Not Showing Up: What to Do.",
+                solutions: [
+                    "Check the connection and try a different port.",
+                    "Ensure the drive is powered on (if applicable).",
+                    "Initialize or format the drive in Disk Management (Windows) or Disk Utility (Mac)."
+                ]
+            },
+            { 
+                category: "Hardware & Peripherals", 
+                title: "Cleaning Your Tech: Keyboards, Screens, Mice (Safely).",
+                solutions: [
+                    "Use compressed air to blow out debris.",
+                    "Wipe surfaces with a microfiber cloth.",
+                    "Use isopropyl alcohol for stubborn spots (avoid excess liquid)."
+                ]
+            },
+            { 
+                category: "Hardware & Peripherals", 
+                title: "Understanding Different Computer Ports (USB-A, USB-C, HDMI, etc.)." },
+            { 
+                category: "Hardware & Peripherals", 
+                title: "How to Check Your Computer's Hardware Specifications.",
+                solutions: [
+                    "Right-click on 'This PC' or 'My Computer' and select 'Properties'.",
+                    "Use System Information tool (msinfo32) for detailed specs.",
+                    "Check Device Manager for hardware components."
+                ]
+            },
+            { 
+                category: "Hardware & Peripherals", 
+                title: "When to Consider Upgrading PC Components (RAM, SSD).",
+                solutions: [
+                    "If your PC is slow and using HDD, consider upgrading to SSD.",
+                    "Add more RAM if you frequently run out of memory (check max capacity).",
+                    "Upgrade the CPU or GPU for better performance in tasks like gaming or video editing."
+                ]
+            },
+            { 
+                category: "Networking & Internet", 
+                title: "\"No Internet Access\" but Connected to Wi-Fi: Solved!" },
+            { 
+                category: "Networking & Internet", 
+                title: "Slow Internet Speed? Troubleshooting Steps.",
+                solutions: [
+                    "Restart your modem and router.",
+                    "Check for bandwidth-heavy applications running.",
+                    "Move closer to the router or use a wired connection.",
+                    "Contact your ISP if the problem persists."
+                ]
+            },
+            { 
+                category: "Networking & Internet", 
+                title: "How to Restart Your Modem & Router Correctly (The \"Power Cycle\").",
+                solutions: [
+                    "Unplug the modem and router from power.",
+                    "Wait for 30 seconds.",
+                    "Plug in the modem first, wait for it to connect, then plug in the router."
+                ]
+            },
+            { 
+                category: "Networking & Internet", 
+                title: "Finding Your Wi-Fi Password (Windows, Mac, Phone).",
+                solutions: [
+                    "Check the label on your router for the default password.",
+                    "Use the router's web interface to find or change the password.",
+                    "On Windows, view saved Wi-Fi passwords in Network & Internet settings."
+                ]
+            },
+            { 
+                category: "Networking & Internet", 
+                title: "Improving Your Wi-Fi Signal Strength at Home.",
+                solutions: [
+                    "Place the router in a central location, elevated position.",
+                    "Reduce interference from other electronic devices.",
+                    "Use a Wi-Fi extender or mesh network for larger areas."
+                ]
+            },
+            { 
+                category: "Networking & Internet", 
+                title: "Understanding IP Addresses, DNS, and Gateways (Simple Explanation)." },
+            { 
+                category: "Networking & Internet", 
+                title: "Setting Up a Basic Home Network.",
+                solutions: [
+                    "Connect the modem to the router's WAN port.",
+                    "Connect your computer or switch to the router's LAN port.",
+                    "Configure network settings in your router's web interface."
+                ]
+            },
+            { 
+                category: "Networking & Internet", 
+                title: "Troubleshooting \"Connected, No Internet\" on Mobile Devices.",
+                solutions: [
+                    "Toggle Airplane Mode on and off.",
+                    "Forget the Wi-Fi network and reconnect.",
+                    "Restart the device.",
+                    "Check for software updates."
+                ]
+            },
+            { 
+                category: "Networking & Internet", 
+                title: "What is a VPN and Why You Might Need One (Simple Guide)." },
+            { 
+                category: "Networking & Internet", 
+                title: "How to Secure Your Home Wi-Fi Network.",
+                solutions: [
+                    "Change the default admin username and password of your router.",
+                    "Enable WPA3 encryption if available, or WPA2 at minimum.",
+                    "Disable WPS and remote management features."
+                ]
+            },
+            { 
+                category: "Networking & Internet", 
+                title: "Fixing Intermittent Wi-Fi Disconnections.",
+                solutions: [
+                    "Restart your router and modem.",
+                    "Update router firmware.",
+                    "Change Wi-Fi channel to avoid interference.",
+                    "Move closer to the router.",
+                    "Check for driver updates on your device."
+                ]
+            },
+            { 
+                category: "Networking & Internet", 
+                title: "Using an Ethernet Cable vs. Wi-Fi: Pros & Cons." },
+            { 
+                category: "Networking & Internet", 
+                title: "Public Wi-Fi Safety Tips." },
+            { 
+                category: "Networking & Internet", 
+                title: "Checking if a Website is Down for Everyone or Just You." },
+            { 
+                category: "Networking & Internet", 
+                title: "Understanding Download vs. Upload Speeds." },
+            { 
+                category: "Security & Privacy", 
+                title: "Creating Strong, Unique Passwords (and Managing Them).",
+                solutions: [
+                    "Use a password manager.",
+                    "Create passwords with a mix of letters, numbers, and symbols.",
+                    "Avoid using the same password for multiple sites.",
+                    "Enable two-factor authentication where possible."
+                ]
+            },
+            { 
+                category: "Security & Privacy", 
+                title: "Enabling Two-Factor Authentication (2FA) Everywhere.",
+                solutions: [
+                    "Go to the security settings of your account.",
+                    "Select the option to enable two-factor authentication.",
+                    "Follow the prompts to set up 2FA via SMS, email, or an authenticator app."
+                ]
+            },
+            { 
+                category: "Security & Privacy", 
+                title: "Spotting Phishing Emails and Scams: A Beginner's Guide.",
+                solutions: [
+                    "Look for generic greetings and urgent requests.",
+                    "Check the sender's email address carefully.",
+                    "Hover over links to see the actual URL before clicking.",
+                    "Report phishing emails to your email provider."
+                ]
+            },
+            { 
+                category: "Security & Privacy", 
+                title: "Basic Antivirus/Anti-Malware Practices.",
+                solutions: [
+                    "Keep your antivirus software up to date.",
+                    "Run regular scans of your system.",
+                    "Be cautious of email attachments and downloads."
+                ]
+            },
+            { 
+                category: "Security & Privacy", 
+                title: "How to Safely Browse the Web and Avoid Malware.",
+                solutions: [
+                    "Use a reputable antivirus and keep it updated.",
+                    "Avoid clicking on suspicious links or ads.",
+                    "Only download software from trusted sources."
+                ]
+            },
+            { 
+                category: "Security & Privacy", 
+                title: "Understanding Browser Cookies and Tracking (Simple Terms)." },
+            { 
+                category: "Security & Privacy", 
+                title: "Securing Your Social Media Accounts.",
+                solutions: [
+                    "Use strong, unique passwords for each account.",
+                    "Enable privacy settings to limit who can see your information.",
+                    "Be cautious of friend requests and messages from unknown users."
+                ]
+            },
+            { 
+                category: "Security & Privacy", 
+                title: "What to Do If You Think You've Been Hacked.",
+                solutions: [
+                    "Change your passwords immediately.",
+                    "Enable two-factor authentication on all accounts.",
+                    "Check your accounts for unauthorized activity."
+                ]
+            },
+            { 
+                category: "Security & Privacy", 
+                title: "Privacy Settings You Should Check on Your Devices NOW.",
+                solutions: [
+                    "Review app permissions and remove unnecessary ones.",
+                    "Adjust location settings to be more private.",
+                    "Regularly update your software to patch vulnerabilities."
+                ]
+            },
+            { 
+                category: "Security & Privacy", 
+                title: "Safe Online Shopping Tips." },
+            { 
+                category: "Productivity Hacks & General IT Knowledge", 
+                title: "Top 5 Keyboard Shortcuts Everyone Should Know.",
+                solutions: [
+                    "Ctrl+C / Cmd+C: Copy",
+                    "Ctrl+V / Cmd+V: Paste",
+                    "Ctrl+Z / Cmd+Z: Undo",
+                    "Alt+Tab / Cmd+Tab: Switch apps",
+                    "Ctrl+F / Cmd+F: Find"
+                ]
+            },
+            { 
+                category: "Productivity Hacks & General IT Knowledge", 
+                title: "Organizing Your Digital Files and Folders Like a Pro.",
+                solutions: [
+                    "Create a main folder for each major area of your life or work.",
+                    "Use subfolders to organize files by project, date, or category.",
+                    "Regularly review and clean up your folders to remove unnecessary files."
+                ]
+            },
+            { 
+                category: "Productivity Hacks & General IT Knowledge", 
+                title: "Using Cloud Storage Effectively (Google Drive, OneDrive, iCloud).",
+                solutions: [
+                    "Choose a cloud storage service that fits your needs and budget.",
+                    "Organize your files in the cloud as you would on your computer.",
+                    "Regularly back up important files to the cloud."
+                ]
+            },
+            { 
+                category: "Productivity Hacks & General IT Knowledge", 
+                title: "Taking Effective Notes Digitally (Tools & Tips).",
+                solutions: [
+                    "Use a note-taking app that syncs across your devices.",
+                    "Organize notes in notebooks or folders by topic or project.",
+                    "Regularly review and update your notes."
+                ]
+            },
+            { 
+                category: "Productivity Hacks & General IT Knowledge", 
+                title: "Automating Simple Tasks on Your Computer (e.g., file backups).",
+                solutions: [
+                    "Use built-in tools like Task Scheduler (Windows) or Automator (Mac).",
+                    "Explore third-party apps for more complex automation needs.",
+                    "Regularly review your automation setups to ensure they still meet your needs."
+                ]
+            },
+            { 
+                category: "Productivity Hacks & General IT Knowledge", 
+                title: "Understanding File Extensions (.exe, .jpg, .pdf, .docx).",
+                solutions: [
+                    "Learn the basics of common file extensions and their associated programs.",
+                    "Be cautious when downloading files with unknown extensions.",
+                    "Use a file conversion tool if you need to change a file's format."
+                ]
+            },
+            { 
+                category: "Productivity Hacks & General IT Knowledge", 
+                title: "The Difference Between RAM and Storage (Simple Analogy)." },
+            { 
+                category: "Productivity Hacks & General IT Knowledge", 
+                title: "How to Check for Software Updates (and Why It's Important).",
+                solutions: [
+                    "Enable automatic updates for your operating system and apps.",
+                    "Regularly check for updates manually, at least once a month.",
+                    "Read update notes to understand what has been changed or fixed."
+                ]
+            },
+            { 
+                category: "Productivity Hacks & General IT Knowledge", 
+                title: "Ergonomics for Computer Users: Setting Up Your Workspace.",
+                solutions: [
+                    "Adjust your chair, desk, and monitor to comfortable heights.",
+                    "Use a chair with good lumbar support.",
+                    "Keep your feet flat on the floor and knees at hip level."
+                ]
+            },
+            { 
+                category: "Productivity Hacks & General IT Knowledge", 
+                title: "Basic Data Backup Strategies for Beginners (3-2-1 Rule).",
+                solutions: [
+                    "Keep 3 total copies of your data: 2 local (on different devices) and 1 off-site (cloud or external drive).",
+                    "Regularly test your backups by restoring a file or two.",
+                    "Update your backup strategy as your data storage needs change."
+                ]
+            },
+            { 
+                category: "Emerging Tech & Fun IT", 
+                title: "What is AI? A Simple Explanation for Beginners.",
+                solutions: [
+                    "AI stands for Artificial Intelligence.",
+                    "It enables computers to perform tasks that typically require human intelligence.",
+                    "Examples: voice assistants, image recognition, chatbots.",
+                    "AI is used in daily life more than you think!"
+                ]
+            },
+            { 
+                category: "Emerging Tech & Fun IT", 
+                title: "Cloud Computing Explained in Plain English." },
+            { 
+                category: "Emerging Tech & Fun IT", 
+                title: "Introduction to Smart Home Devices." },
+            { 
+                category: "Emerging Tech & Fun IT", 
+                title: "QR Codes: How They Work and How to Use Them Safely." },
+            { 
+                category: "Emerging Tech & Fun IT", 
+                title: "The Metaverse: What Is It, Really? (Simple Overview)." },
+            { 
+                category: "Emerging Tech & Fun IT", 
+                title: "Cool Things You Can Do With Your Old Computer/Phone." },
+            { 
+                category: "Emerging Tech & Fun IT", 
+                title: "Fun and Useful Websites/Apps You Might Not Know." }
+        ];
+
+        const topicsContainer = document.getElementById('topicsContainer');
+        const categoryFiltersContainer = document.getElementById('categoryFilters');
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchButton = document.getElementById('clearSearchButton');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+
+        let currentCategory = 'All';
+        let currentSearchTerm = '';
+
+        function getUniqueCategories() {
+            const categories = new Set(topicsData.map(topic => topic.category));
+            return ['All', ...categories];
+        }
+
+        function renderCategoryFilters() {
+            const categories = getUniqueCategories();
+            categoryFiltersContainer.innerHTML = '';
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.textContent = category;
+                button.classList.add('px-4', 'py-2', 'font-medium', 'rounded-lg', 'shadow', 'transition', 'duration-150', 'ease-in-out', 'bg-teal-500', 'text-white', 'hover:bg-teal-600', 'focus:outline-none', 'focus:ring-2', 'focus:ring-teal-400', 'focus:ring-opacity-75');
+                if (category === currentCategory) {
+                    button.classList.add('active-filter');
+                }
+                button.addEventListener('click', () => {
+                    currentCategory = category;
+                    renderTopics();
+                    updateActiveFilterButton();
+                });
+                categoryFiltersContainer.appendChild(button);
+            });
+        }
+
+        function updateActiveFilterButton() {
+            const buttons = categoryFiltersContainer.querySelectorAll('button');
+            buttons.forEach(button => {
+                if (button.textContent === currentCategory) {
+                    button.classList.add('active-filter');
+                } else {
+                    button.classList.remove('active-filter');
+                }
+            });
+        }
+
+        function renderTopics() {
+            topicsContainer.innerHTML = '';
+            const filteredTopics = topicsData.filter(topic => {
+                const matchesCategory = currentCategory === 'All' || topic.category === currentCategory;
+                const matchesSearch = topic.title.toLowerCase().includes(currentSearchTerm.toLowerCase()) || topic.category.toLowerCase().includes(currentSearchTerm.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filteredTopics.length === 0) {
+                noResultsMessage.classList.remove('hidden');
+            } else {
+                noResultsMessage.classList.add('hidden');
+            }
+
+            filteredTopics.forEach(topic => {
+                const topicCard = document.createElement('div');
+                topicCard.classList.add('bg-white', 'p-6', 'rounded-lg', 'shadow-lg', 'hover:shadow-xl', 'transition-shadow', 'duration-200', 'ease-in-out', 'flex', 'flex-col', 'justify-between');
+
+                const title = document.createElement('h3');
+                title.classList.add('text-lg', 'font-semibold', 'text-teal-700', 'mb-2');
+                title.textContent = topic.title;
+
+                // Solutions list (clickable)
+                let solutionsList = null;
+                if (topic.solutions && topic.solutions.length > 0) {
+                    solutionsList = document.createElement('ul');
+                    solutionsList.classList.add('list-disc', 'pl-5', 'mb-2', 'text-sm', 'text-stone-700', 'cursor-pointer', 'hover:text-teal-600');
+                    solutionsList.title = "Click for a detailed explanation";
+                    solutionsList.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        window.open(`topic.html?title=${encodeURIComponent(topic.title)}`, '_blank');
+                    });
+                    topic.solutions.forEach(solution => {
+                        const li = document.createElement('li');
+                        li.textContent = solution;
+                        solutionsList.appendChild(li);
+                    });
+                }
+
+                const categoryP = document.createElement('p');
+                categoryP.classList.add('text-sm', 'text-stone-500', 'mt-auto', 'pt-2', 'border-t', 'border-stone-200');
+                categoryP.textContent = `Category: ${topic.category}`;
+                
+                topicCard.appendChild(title);
+                if (solutionsList) topicCard.appendChild(solutionsList);
+                topicCard.appendChild(categoryP);
+                topicsContainer.appendChild(topicCard);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            currentSearchTerm = e.target.value;
+            renderTopics();
+        });
+
+        clearSearchButton.addEventListener('click', () => {
+            searchInput.value = '';
+            currentSearchTerm = '';
+            renderTopics();
+        });
+
+        // Initial render
+        renderCategoryFilters();
+        renderTopics();
+
+    </script>
+</body>
+</html>
